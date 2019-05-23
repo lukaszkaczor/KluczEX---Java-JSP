@@ -1,0 +1,415 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+*:active,
+*:hover,
+*:focus {
+    outline: 0px !important;
+    -webkit-appearance: none;
+}
+
+:root {
+    --primaryColor: #EEEEEE;
+    --secondaryColor: #FFFFFF;
+    --fontColor: #333;
+    /* --fontColor: #262626; */
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-top: 100px;
+    background: var(--primaryColor);
+}
+
+
+/*karuzela + bestsellery*/
+.captions {
+    display: flex;
+    flex-basis: 60%;
+    align-items: flex-end;
+    font-family: 'Roboto', sans-serif;
+    color: var(--fontColor);
+
+}
+
+.cpt1 {
+    padding-top: 4.5rem;
+    flex: 2;
+    font-size: 25px;
+}
+
+.cpt2 {
+    padding-top: 4.5rem;
+    flex: 1;
+    font-size: 25px;
+    margin-left: 1.5rem;
+}
+
+.main {
+    display: flex;
+    flex-basis: 100%;
+    justify-content: center;
+}
+
+.content {
+    display: flex;
+    flex-basis: 60%;
+    justify-content: space-between;
+    font-family: 'Roboto', sans-serif;
+    align-items: center;
+    font-size: 18px;
+    color: var(--fontColor);
+}
+
+.carousel {
+    display: flex;
+    flex: 2;
+    align-items: center;
+}
+
+.carousel h1 {
+    flex-basis: 100%;
+}
+
+.carousel-inner {
+    border-radius: 20px;
+}
+
+.bestsellers {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-left: 2rem;
+    height: 30.4rem;
+}
+
+.bestseller {
+    flex-basis: 45%;
+    height: 45%;
+    border-radius: 30px;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: all 1s ease-in-out;
+}
+
+.bestseller:hover {
+    transform: rotateY(180deg);
+}
+
+.front {
+    backface-visibility: hidden;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+}
+
+.back {
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+    background: var(--fontColor);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    flex-direction: column;
+}
+
+
+.bestseller img {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+}
+
+.bestseller .back h2 {
+    flex: 3;
+    text-align: center;
+    font-size: 16px;
+    color: var(--primaryColor);
+    padding: 40px 20px 0 20px;
+}
+
+.bestseller .back h3 {
+    flex: 1;
+    text-align: center;
+    border-radius: 0 0 10px 10px;
+    font-size: 16px;
+    color: var(--primaryColor);
+}
+
+/*platformy*/
+.cpt3 {
+    font-size: 25px;
+    margin: 2rem 0 1rem 0;
+}
+
+.platformSection {
+    padding-bottom: 50px;
+
+}
+
+.platforms {
+    display: flex;
+    flex-basis: 60%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+}
+
+.platform {
+    height: 9rem;
+    flex-basis: 9rem;
+    position: relative;
+}
+
+.platform:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.platform img {
+    width: 100%;
+    border-radius: 20px;
+}
+
+.platform h1 {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    color: var(--primaryColor);
+    font-size: 20px;
+}
+
+/* platformy koniec */
+
+
+/* rozsuwane listy gier */
+.posts,
+.posts2 {
+    display: flex;
+    flex-basis: 60%;
+    flex-wrap: wrap;
+}
+
+.posts .holder,
+.posts2 .holder {
+    margin: 0 0 30px;
+}
+
+.holder {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+
+.displayNone {
+    display: none;
+    height: 12.5rem;
+}
+
+.box {
+    width: 9rem;
+    height: 12.5rem;
+    background: var(--fontColor);
+    display: block;
+    border-radius: 25px;
+    position: relative;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: all 1s ease-in-out;
+}
+
+.box:hover {
+    transform: rotateY(180deg);
+}
+
+
+.box img {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+}
+
+.box .back h2 {
+    flex: 3;
+    text-align: center;
+    font-size: 16px;
+    color: var(--primaryColor);
+    padding: 40px 20px 0 20px;
+}
+
+.box .back h3 {
+    flex: 1;
+    text-align: center;
+    border-radius: 0 0 10px 10px;
+    font-size: 16px;
+    color: var(--primaryColor);
+}
+
+.box h1 {
+    position: absolute;
+    bottom: 0;
+    font-size: 18px;
+}
+
+
+.btnHolder {
+    margin: 0 auto;
+    padding-bottom: 30px;
+}
+
+#btnRedirect,
+#btnRedirect2 {
+    display: none;
+}
+
+.whiteBg {
+    background: var(--secondaryColor);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.cpt4 {
+    font-size: 25px;
+    margin: 1rem 0 1rem 0;
+}
+
+#btnMore,
+#btnMore2 {
+    background: var(--primaryColor);
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: var(--fontColor);
+    border: none;
+    cursor: pointer;
+}
+
+#btnMore2,
+#btnRedirect2 {
+    background: var(--secondaryColor);
+}
+/* rozsuwane listy gier koniec*/
+
+/* stopka poczatek */
+footer{
+    display: flex;
+    justify-content: center;
+    height: 40vh;
+    background: var(--fontColor);
+    width: 100%;
+}
+
+.footerContent{
+    flex-basis: 60%;
+    height: 100%;
+}
+
+.firstHalf{
+    display: flex;
+    height: 50%;
+    width: 100%;
+    border-bottom: 1px solid var(--primaryColor);
+    justify-content: space-between;
+    align-items: center;
+}
+
+.firstHalf div{
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}
+
+.firstHalf h1{
+    font-size: 18px;
+    color: var(--secondaryColor);
+}
+
+.firstHalf a{
+    color: #d3d3d3;
+    font-size:13px;
+}
+
+.secondHalf{
+    display: flex;
+    padding: 30px;
+    align-items: center;
+}
+
+.footerPaymentMethods{
+    display: flex;
+    flex-basis: 50%;
+    flex-wrap: wrap;
+}
+
+.footerPaymentMethods h1, .footerFollowUs h1{
+    color: var(--secondaryColor);
+    width: 100%;
+    font-size: 25px;
+}
+
+.footerPaymentMethods a, .footerFollowUs a{
+    color: var(--secondaryColor);
+    font-size: 50px;
+    padding-right: 23px;
+    transition: .5s;
+}
+
+.footerPaymentMethods a:hover, .footerFollowUs a:hover{
+    color:#4bd86f;
+}
+/* stopka koniec */
+
+
+/* przycisk do gory */
+#back-to-top-btn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 26px;
+    width: 50px;
+    height: 50px;
+    background-color:#333;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    border: 3px solid #FFF;
+    border-radius: 50%;
+  }
+
+
+@media only screen and (max-width: 1600px) {
+
+    .nav,
+    .content,
+    .captions,
+    .platforms,
+    .posts,
+    .posts2,
+    .footerContent {
+        flex-basis: 80%;
+    }
+
+}

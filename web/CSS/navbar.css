@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+*:active,
+*:hover,
+*:focus {
+    outline: 0px !important;
+    -webkit-appearance: none;
+}
+:root {
+    --primaryColor: #EEEEEE;
+    --secondaryColor: #FFFFFF;
+    --fontColor: #333;
+    /* --fontColor: #262626; */
+}
+
+/*navbar*/
+.navbar {
+    display: flex;
+    width: 100%;
+    height: 90px;
+    background: var(--secondaryColor);
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    z-index: 99;
+}
+
+.nav {
+    display: flex;
+    flex-basis: 60%;
+}
+
+.logo {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    color: var(--secondaryColor);
+    width: 60%;
+}
+
+.logoText {
+    background: #333;
+    font-family: 'Roboto', sans-serif;
+    padding: 3px 20px;
+    font-size: 35px;
+    border: 2px solid var(--secondaryColor);
+    border-radius: 1px;
+    box-shadow: 0px 0px 0px 4px rgba(51, 51, 51, 1);
+    font-family: 'Roboto', sans-serif;
+    color: var(--secondaryColor);
+    transition: .5s;
+}
+
+
+.logoText:hover {
+    cursor: pointer;
+    background-color: var(--secondaryColor);
+    color: var(--fontColor);
+    text-decoration: none;
+}
+
+.search {
+    display: flex;
+    flex: 2.5;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.searchInput {
+    flex-basis: 70%;
+    height: 50px;
+    padding: 0 15px 0 25px;
+    border-radius: 25px 0 0 25px;
+    background: var(--primaryColor);
+    color: var(--fontColor);
+    font-size: 18px;
+    outline: none;
+    border: none;
+}
+
+.searchButton {
+    display: flex;
+    flex-basis: 12%;
+    justify-content: center;
+    height: 50px;
+    border-radius: 0 25px 25px 0;
+    background: var(--primaryColor);
+    color: var(--fontColor);
+    outline: none;
+    border: none;
+    font-size: 18px;
+    transition: 0.1s;
+}
+
+.searchButton:hover {
+    cursor: pointer;
+    font-size: 22px;
+}
+
+
+.navigation {
+    display: flex;
+    flex: 1.5;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.link {
+    padding: 15px;
+    background: var(--primaryColor);
+    text-decoration: none;
+    color: var(--fontColor);
+    margin-left: 1rem;
+    border-radius: 25px;
+    font-size: 16px;
+    text-align: center;
+    transition: 0.35s linear;
+    font-family: 'Roboto', sans-serif;
+}
+
+.link:hover {
+    background: var(--fontColor);
+    color: var(--primaryColor);
+    text-decoration: none;
+}
+
+/* navbar end */
+
+@media only screen and (max-width: 1600px) {
+
+    .nav {
+        flex-basis: 80%;
+    }
+
+}
