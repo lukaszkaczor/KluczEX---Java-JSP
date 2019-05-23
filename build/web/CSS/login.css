@@ -1,0 +1,150 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+*:active,
+*:hover,
+*:focus {
+    outline: 0px !important;
+    -webkit-appearance: none;
+}
+
+:root {
+    --primaryColor: #EEEEEE;
+    --secondaryColor: #FFFFFF;
+    --fontColor: #333;
+}
+
+body {
+    background: var(--secondaryColor);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    /* flex-basis: 12%; */
+    width: 23%;
+    height: 30rem;
+    background: var(--primaryColor);
+    margin-top: 120px;
+}
+
+.line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.line label {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    height: 100%;
+    color: var(--fontColor);
+    padding: 10px;
+}
+
+.line input {
+    border: none;
+    width: 200px;
+    padding-right: 10px;
+}
+
+.line {
+    background: var(--secondaryColor);
+    border: 1px solid var(--fontColor)
+}
+
+.btnLogin {
+    width: 47%;
+    height: 50px;
+    text-transform: uppercase;
+    background: var(--fontColor);
+    border: none;
+    color: var(--secondaryColor)
+}
+
+.btnLogin:hover {
+    cursor: pointer;
+}
+
+form a {
+    text-decoration: none;
+    color: var(--fontColor)
+}
+
+form a:hover {
+    text-decoration: underline;
+    color: var(--fontColor)
+}
+
+.logo {
+    position: absolute;
+    display: flex;
+    left: 100px;
+    top: 50px;
+    align-items: center;
+}
+
+.logoText {
+    background: #333;
+    font-family: 'Roboto', sans-serif;
+    color: var(--secondaryColor);
+    border: 2px solid var(--secondaryColor);
+    border-radius: 1px;
+    box-shadow: 0px 0px 0px 4px rgba(51, 51, 51, 1);
+    padding: 5px 10px;
+    margin-top: .4rem;
+    transition: 0.3s;
+}
+
+.logoText:hover {
+    cursor: pointer;
+    background-color: var(--secondaryColor);
+    color: var(--fontColor);
+}
+
+span {
+    font-weight: bold;
+}
+
+.loginInfo{
+    color: red;
+    font-size: 25px;
+    position: absolute; 
+    bottom: 25%;
+
+}
+
+@media only screen and (max-height: 1000px) {
+
+    .loginInfo{
+
+        bottom: 2%;
+    
+    }
+
+}
+
+
+@media only screen and (max-width: 1600px) {
+
+    form {
+        flex-basis: 30%;
+    }
+
+    .btnLogin {
+        width: 51%;
+    }
+
+}
