@@ -4,7 +4,7 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="kluczex.DBConnection"%>
 <!DOCTYPE html>
-<%@ page errorPage="error.jsp" %>  
+<%--<%@ page errorPage="error.jsp" %>--%>  
 <html lang="en">
     <%@ page language="java" contentType="text/html; charset=UTF-8"
              pageEncoding="UTF-8"%>
@@ -26,8 +26,69 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/product.css">
 
     </head>
+    <%
+        Cookie cookie = null;
+        Cookie[] cookies = null;
+        cookies = request.getCookies();
+        String user = null;
+        Boolean isLoggedIn = false;
+        if (cookies != null) {
+            for (int i = 0; i < cookies.length; i++) {
+                if (cookies[i].getName().equals("username")) {
+                    isLoggedIn = true;
+                    user = cookies[i].getValue();
+                }
+            }
+        } else {
+            out.println("<h2>No cookies founds</h2>");
+        }
+    %>
 
     <body>
+
+        <%
+            if (isLoggedIn) {
+        %>
+        <link rel="stylesheet" href="CSS/style.css">
+        <link rel="stylesheet" href="CSS/navbar.css">
+        <div class="navbar">
+            <div class="nav">
+                <div class="logo">
+                    <a href="../index.jsp" class="logoText">KluczEx</a>
+                </div>
+
+                <form action="<%=request.getContextPath()%>/HTML/productList.jsp" class="search">
+                    <input class="searchInput" type="text" name="textInput" placeholder="Szukaj...">
+                    <button type="submit" class="searchButton"><i class="fas fa-search"></i></button>
+                </form>
+                <div class="navigation">
+                    <a href="" class="link"><i class="fas fa-shopping-basket"></i></i>&nbsp 0</a>
+
+                    <div class="btn-group">
+                        <a href="<%=request.getContextPath()%>/HTML/login.jsp" type="" class="btn  link">Profil</a>
+                        <button type="button" class="btn dropdown-toggle dropdown-toggle-split link" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item bt" href="#">Action</a>
+                            <a class="dropdown-item bt" href="#">Another action</a>
+                            <a class="dropdown-item bt" href="#">Something else here</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">
+                                <form action="<%=request.getContextPath()%>/LogoutServlet" method="post">
+                                    <input class="dropdown-item bt"  type="submit" value="Wyloguj">
+                                </form>
+
+                            </a>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <%
+        } else {
+        %>
         <div class="navbar">
             <div class="nav">
                 <div class="logo">
@@ -40,11 +101,12 @@
                 </form>
 
                 <div class="navigation">
-                    <a href="HTML/login.html" class="link"><i class="fas fa-user-alt"></i></i>&nbsp Zaloguj</a>
-                    <a href="" class="link"><i class="fas fa-shopping-basket"></i></i>&nbsp 0</a>
+                    <a href="" class="link"><i class="fas fa-shopping-basket"></i>&nbsp 0</a>
+                    <a href="<%=request.getContextPath()%>/HTML/login.jsp" class="link"><i class="fas fa-user-alt"></i>&nbsp Zaloguj</a>
                 </div>
             </div>
         </div>
+        <%} %>
 
         <%
             String product = request.getParameter("productID");
@@ -102,9 +164,9 @@
                 </div>
 
                 <div class="addToCartField">
-
                     <h1 class="price"><%=result.getString("cena")%> zł</h1>
-                    <form action="">
+                    
+                    <form action="<%=request.getContextPath()%>/AddToCartServlet?productID=<%=product%>" method="POST">
                         <input class="addToCartNumber" type="number" value="1" name="quantity" min="1">
                         <input class="addToCartBtn" type="submit" value="Dodaj do koszyka">
                     </form>
