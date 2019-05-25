@@ -17,21 +17,26 @@ import java.util.logging.Logger;
 
 public class DBConnection {
 
-    public ResultSet result;
-    PreparedStatement stmt;
+    public ResultSet result, result2, result3;
+    PreparedStatement stmt, stmt2, stmt3;
     public String statement;
+    Connection con;
 
-    public ResultSet ExecuteQuery(String statement) throws SQLException {
+    public DBConnection() throws SQLException {
         try {
             Class.forName("org.postgresql.Driver");
-            Connection con = DriverManager.getConnection("jdbc:postgresql://sql.racecar.nazwa.pl/racecar_sklepKluczy", "racecar_sklepKluczy", "Hurtownia1");
-            stmt = con.prepareStatement(statement);
-            result = stmt.executeQuery();
-
-            con.close();
+            con = DriverManager.getConnection("jdbc:postgresql://sql.racecar.nazwa.pl/racecar_sklepKluczy", "racecar_sklepKluczy", "Hurtownia1");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+    }
+
+    public ResultSet ExecuteQuery(String statement) throws SQLException {
+        stmt = con.prepareStatement(statement);
+        result = stmt.executeQuery();
+//        con.close();
+
         return result;
     }
 
@@ -45,7 +50,8 @@ public class DBConnection {
             String query = statement;
             ps = con.prepareStatement(query);
             ps.executeUpdate();
-            
+            con.close();
+
         } catch (SQLException ex) {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
