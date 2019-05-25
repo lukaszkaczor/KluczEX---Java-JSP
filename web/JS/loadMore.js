@@ -69,7 +69,7 @@ $('#btnMore2').on('click', function () {
     }
 
     if(j===4){
-        $('#btnMore2').attr('href', 'https://google.pl');
+        $('#btnMore2').attr('href', 'HTML/productList.jsp?cheaperThan=50');
    }
 });
 

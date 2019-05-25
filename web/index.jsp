@@ -30,7 +30,7 @@
         <div class="navbar">
             <div class="nav">
                 <div class="logo">
-                    <a href="HTML/product.html" class="logoText">KluczEx</a>
+                    <a href="#" class="logoText">KluczEx</a>
                 </div>
 
                 <form action="HTML/productList.jsp" class="search">
@@ -153,29 +153,29 @@
         </div>
         <section class="main platformSection">
             <div class="platforms">
-                <div class="platform"> <img src="img/platforms/steam.png" alt="Steam">
+                <a href="HTML/productList.jsp?platform=1" class="platform"> <img src="img/platforms/steam.png" alt="Steam">
                     <h1>Steam</h1>
-                </div>
+                </a>
 
-                <div class="platform"> <img src="img/platforms/ea-origin.png" alt="EA Origin">
+                <a href="HTML/productList.jsp?platform=3" class="platform"> <img src="img/platforms/ea-origin.png" alt="EA Origin">
                     <h1>Origin</h1>
-                </div>
+                </a>
 
-                <div class="platform"> <img src="img/platforms/uplay.png" alt="Uplay">
+                <a href="HTML/productList.jsp?platform=2" class="platform"> <img src="img/platforms/uplay.png" alt="Uplay">
                     <h1>Uplay</h1>
-                </div>
+                </a>
 
-                <div class="platform"> <img src="img/platforms/battle-net.png" alt="Battle.net">
+                <a href="HTML/productList.jsp?platform=4" class="platform"> <img src="img/platforms/battle-net.png" alt="Battle.net">
                     <h1>Battle.net</h1>
-                </div>
+                </a>
 
-                <div class="platform"> <img src="img/platforms/console.png" alt="Other">
+                <a href="HTML/productList.jsp?platform=7" class="platform"> <img src="img/platforms/console.png" alt="Other">
                     <h1>Konsole</h1>
-                </div>
+                </a>
 
-                <div class="platform"> <img src="img/platforms/other.png" alt="GoG">
+                <a href="HTML/productList.jsp?platform=6" class="platform"> <img src="img/platforms/other.png" alt="GoG">
                     <h1>Inne</h1>
-                </div>
+                </a>
             </div>
         </section>
 

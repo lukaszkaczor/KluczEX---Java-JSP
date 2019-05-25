@@ -4,7 +4,7 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="kluczex.DBConnection"%>
 <!DOCTYPE html>
-<%--<%@ page errorPage="error.jsp" %>--%>  
+<%@ page errorPage="error.jsp" %>  
 <html lang="en">
     <%@ page language="java" contentType="text/html; charset=UTF-8"
              pageEncoding="UTF-8"%>
@@ -20,10 +20,10 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto&amp;subset=latin-ext" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../CSS/navbar.css">
-        <link rel="stylesheet" href="../CSS/style.css">
-        <link rel="stylesheet" href="../CSS/productList.css">
-        <link rel="stylesheet" href="../CSS/product.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/navbar.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/style.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/productList.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/product.css">
 
     </head>
 
@@ -31,7 +31,7 @@
         <div class="navbar">
             <div class="nav">
                 <div class="logo">
-                    <a href="html/productList.html" class="logoText">KluczEx</a>
+                    <a href="<%=request.getContextPath()%>/index.jsp" class="logoText">KluczEx</a>
                 </div>
 
                 <form action="<%=request.getContextPath()%>/HTML/productList.jsp" class="search">
