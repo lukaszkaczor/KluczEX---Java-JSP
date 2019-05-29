@@ -39,33 +39,35 @@
                     user = cookies[i].getValue();
                 }
             }
-        } else {
-            out.println("<h2>No cookies founds</h2>");
         }
+        DBConnection dbc = new DBConnection();
+        ResultSet suma = dbc.ExecuteQuery("select sum(ilosc) as suma from koszyk where login ='" + user + "'");
+        suma.next();
+                    String suma2 = suma.getString("suma");
+            if(suma2==null) 
+                suma2 = "0";
     %>
 
     <body>
-
         <%
             if (isLoggedIn) {
         %>
-        <link rel="stylesheet" href="CSS/style.css">
-        <link rel="stylesheet" href="CSS/navbar.css">
         <div class="navbar">
             <div class="nav">
                 <div class="logo">
-                    <a href="../index.jsp" class="logoText">KluczEx</a>
+                    <a href="<%=request.getContextPath()%>/index.jsp" class="logoText">KluczEx</a>
                 </div>
 
                 <form action="<%=request.getContextPath()%>/HTML/productList.jsp" class="search">
                     <input class="searchInput" type="text" name="textInput" placeholder="Szukaj...">
                     <button type="submit" class="searchButton"><i class="fas fa-search"></i></button>
                 </form>
+
                 <div class="navigation">
-                    <a href="" class="link"><i class="fas fa-shopping-basket"></i></i>&nbsp 0</a>
+                    <a href="<%=request.getContextPath()%>/HTML/cart.jsp" class="link"><i class="fas fa-shopping-basket"></i></i>&nbsp <%=suma2%></a>
 
                     <div class="btn-group">
-                        <a href="<%=request.getContextPath()%>/HTML/login.jsp" type="" class="btn  link">Profil</a>
+                        <a href="<%=request.getContextPath()%>/HTML/login.html" type="" class="btn  link">Profil</a>
                         <button type="button" class="btn dropdown-toggle dropdown-toggle-split link" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                             <span class="sr-only">Toggle Dropdown</span>
@@ -83,35 +85,18 @@
                             </a>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
         </div>
         <%
         } else {
         %>
-        <div class="navbar">
-            <div class="nav">
-                <div class="logo">
-                    <a href="<%=request.getContextPath()%>/index.jsp" class="logoText">KluczEx</a>
-                </div>
-
-                <form action="<%=request.getContextPath()%>/HTML/productList.jsp" class="search">
-                    <input class="searchInput" type="text" name="textInput" placeholder="Szukaj...">
-                    <button type="submit" class="searchButton"><i class="fas fa-search"></i></button>
-                </form>
-
-                <div class="navigation">
-                    <a href="" class="link"><i class="fas fa-shopping-basket"></i>&nbsp 0</a>
-                    <a href="<%=request.getContextPath()%>/HTML/login.jsp" class="link"><i class="fas fa-user-alt"></i>&nbsp Zaloguj</a>
-                </div>
-            </div>
-        </div>
+        <%@include file="navbar.jsp" %>
         <%} %>
 
         <%
             String product = request.getParameter("productID");
 
-            DBConnection dbc = new DBConnection();
             ResultSet result = dbc.ExecuteQuery("select distinct produkty.nazwa, count(produkty.nazwa) as ilosc, produkty.opis, klucze.cena, zdjecia.okladka, zdjecia.zdjecie1, zdjecia.zdjecie2, zdjecia.zdjecie3, "
                     + "producenci.nazwa as producenci_nazwa, platformy.nazwa as platformy_nazwa, wymagania_systemowe.procesor, wymagania_systemowe.karta_graficzna, wymagania_systemowe.pamiec_ram, wymagania_systemowe.dysk, "
                     + "wymagania_systemowe.system_operacyjny from produkty join zdjecia on produkty.id_produktu = zdjecia.id_produktu join producenci on "
@@ -126,22 +111,22 @@
             int randomNumber;
 
             List<Integer> random = new ArrayList<Integer>();
-            while(true)
-            {
-                randomNumber = (int)(Math.random() * ilosc + 1);
-                if(!random.contains(randomNumber))
-                  random.add(randomNumber);
-                
-                if(random.size()==3)
+            while (true) {
+                randomNumber = (int) (Math.random() * ilosc + 1);
+                if (!random.contains(randomNumber)) {
+                    random.add(randomNumber);
+                }
+
+                if (random.size() == 3) {
                     break;
+                }
             }
-            
+
             ResultSet offer = dbc.ExecuteQuery("select distinct produkty.nazwa, produkty.id_produktu, klucze.cena, zdjecia.okladka, zdjecia.tlo from produkty join klucze on produkty.id_produktu"
-                    + " = klucze.id_produktu join zdjecia on zdjecia.id_produktu = produkty.id_produktu where produkty.id_produktu in ("+random.get(0)+","+random.get(1)+","+random.get(2)+")");
+                    + " = klucze.id_produktu join zdjecia on zdjecia.id_produktu = produkty.id_produktu where produkty.id_produktu in (" + random.get(0) + "," + random.get(1) + "," + random.get(2) + ")");
             result.next();
         %>
-        
-      
+
 
         <section class="productView">
             <div class="imgField">
@@ -165,14 +150,17 @@
 
                 <div class="addToCartField">
                     <h1 class="price"><%=result.getString("cena")%> zł</h1>
-                    
-                    <form action="<%=request.getContextPath()%>/AddToCartServlet?productID=<%=product%>" method="POST">
+
+                    <form action="<%=request.getContextPath()%>/AddToCartServlet?productID=<%=product%>&isLoggedIn=<%=isLoggedIn%>" method="POST">
                         <input class="addToCartNumber" type="number" value="1" name="quantity" min="1">
                         <input class="addToCartBtn" type="submit" value="Dodaj do koszyka">
                     </form>
 
 
                     <div class="addInfo">
+                        <%if (request.getAttribute("errorMessage") != null) {%>
+                        <div style="color:red" class="loginInfo"><i class="fas fa-times"></i>&nbsp;   <%= request.getAttribute("errorMessage")%></div>
+                        <%}%>
                         <div><i class="fas fa-check-circle"></i><strong>&nbsp; Dostępnych <%=result.getString("ilosc")%> sztuk </strong></div>
                         <div><i class="fas fa-envelope"></i>&nbsp; Natychmiastowa wysyłka</div>
                         <div><i class="fas fa-key"></i>&nbsp;  Klucz cyfrowy</div>

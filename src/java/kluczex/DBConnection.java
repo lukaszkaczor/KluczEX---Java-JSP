@@ -17,8 +17,8 @@ import java.util.logging.Logger;
 
 public class DBConnection {
 
-    public ResultSet result, result2, result3;
-    PreparedStatement stmt, stmt2, stmt3;
+    public ResultSet result;
+    PreparedStatement stmt; 
     public String statement;
     Connection con;
 

@@ -38,8 +38,17 @@
                     user = cookies[i].getValue();
                 }
             }
-        } else {
-            out.println("<h2>No cookies founds</h2>");
+        }
+
+        DBConnection dbc = new DBConnection();
+        ResultSet result = dbc.ExecuteQuery("select distinct produkty.nazwa, produkty.id_produktu, klucze.cena, zdjecia.okladka from produkty join klucze on produkty.id_produktu = klucze.id_produktu join zdjecia on produkty.id_produktu = zdjecia.id_produktu where cena<50");
+        List<IndexJSPproduct> cheaperThan50 = new ArrayList();
+        int i = 0;
+        ResultSet ilosc = dbc.ExecuteQuery("select sum(ilosc) as suma from koszyk where login ='" + user + "'");
+        ilosc.next();
+        String suma = ilosc.getString("suma");
+        if (suma == null) {
+            suma = "0";
         }
     %>
 
@@ -47,23 +56,25 @@
         <%
             if (isLoggedIn) {
         %>
-        <link rel="stylesheet" href="CSS/style.css">
-        <link rel="stylesheet" href="CSS/navbar.css">
+
         <div class="navbar">
             <div class="nav">
                 <div class="logo">
-                    <a href="../index.html" class="logoText">KluczEx</a>
+                    <a href="<%=request.getContextPath()%>/index.jsp" class="logoText">KluczEx</a>
                 </div>
 
-                <form action="HTML/productList.jsp" class="search">
+                <form action="<%=request.getContextPath()%>/HTML/productList.jsp" class="search">
                     <input class="searchInput" type="text" name="textInput" placeholder="Szukaj...">
                     <button type="submit" class="searchButton"><i class="fas fa-search"></i></button>
                 </form>
+
+
+
                 <div class="navigation">
-                    <a href="" class="link"><i class="fas fa-shopping-basket"></i></i>&nbsp 0</a>
+                    <a href="<%=request.getContextPath()%>/HTML/cart.jsp" class="link"><i class="fas fa-shopping-basket"></i></i>&nbsp <%=suma%></a>
 
                     <div class="btn-group">
-                        <a href="/HTML/login.html" type="" class="btn  link">Profil</a>
+                        <a href="<%=request.getContextPath()%>/HTML/login.html" type="" class="btn  link">Profil</a>
                         <button type="button" class="btn dropdown-toggle dropdown-toggle-split link" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                             <span class="sr-only">Toggle Dropdown</span>
@@ -81,29 +92,17 @@
                             </a>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
         </div>
+
+        <%--<%@include file="HTML/navbarExt.jsp" %>--%>
+
         <%
         } else {
         %>
-        <div class="navbar">
-            <div class="nav">
-                <div class="logo">
-                    <a href="#" class="logoText">KluczEx</a>
-                </div>
+        <%@include file="HTML/navbar.jsp" %>
 
-                <form action="HTML/productList.jsp" class="search">
-                    <input class="searchInput" type="text" name="textInput" placeholder="Szukaj...">
-                    <button type="submit" class="searchButton"><i class="fas fa-search"></i></button>
-                </form>
-
-                <div class="navigation">
-                    <a href="" class="link"><i class="fas fa-shopping-basket"></i>&nbsp 0</a>
-                    <a href="HTML/login.jsp" class="link"><i class="fas fa-user-alt"></i>&nbsp Zaloguj</a>
-                </div>
-            </div>
-        </div>
         <%} %>
         <div class="captions">
             <h1 class="cpt1">Aktualności</h1>
@@ -244,11 +243,6 @@
 
 
         <%
-            DBConnection dbc = new DBConnection();
-            ResultSet result = dbc.ExecuteQuery("select distinct produkty.nazwa, produkty.id_produktu, klucze.cena, zdjecia.okladka from produkty join klucze on produkty.id_produktu = klucze.id_produktu join zdjecia on produkty.id_produktu = zdjecia.id_produktu where cena<50");
-            List<IndexJSPproduct> cheaperThan50 = new ArrayList();
-            int i = 0;
-
             while (result.next()) {
                 cheaperThan50.add(new IndexJSPproduct(result.getString("id_produktu"), result.getString("nazwa"), result.getString("okladka"), result.getString("cena")));
             }

@@ -56,8 +56,5 @@
         <%if (request.getAttribute("errorMessage") != null) {%>
         <h2 class="loginInfo"><%= request.getAttribute("errorMessage")%></h2>
         <%}%>
-
-
     </body>
-
 </html>
