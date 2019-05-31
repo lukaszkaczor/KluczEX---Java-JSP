@@ -104,7 +104,7 @@
                 <h3 class="prAmount">Razem</h3>
                 <!-- <h3 class="prDelete">Razem</h3> -->
             </div>
-            <form action="<%=request.getContextPath()%>/CartServlet" class="list">
+            <form action="<%=request.getContextPath()%>/CartServlet" class="list" method="POST">
                 <%
                     do {
                         float total = 0;

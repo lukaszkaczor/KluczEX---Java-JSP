@@ -41,11 +41,12 @@
             }
         }
         DBConnection dbc = new DBConnection();
-        ResultSet suma = dbc.ExecuteQuery("select sum(ilosc) as suma from koszyk where login ='" + user + "'");
+        ResultSet suma = dbc.ExecuteQuery("select sum(ilosc) as suma from koszyk where login ='" + user + "' and login is null");
         suma.next();
-                    String suma2 = suma.getString("suma");
-            if(suma2==null) 
-                suma2 = "0";
+        String suma2 = suma.getString("suma");
+        if (suma2 == null) {
+            suma2 = "0";
+        }
     %>
 
     <body>
@@ -101,7 +102,7 @@
                     + "producenci.nazwa as producenci_nazwa, platformy.nazwa as platformy_nazwa, wymagania_systemowe.procesor, wymagania_systemowe.karta_graficzna, wymagania_systemowe.pamiec_ram, wymagania_systemowe.dysk, "
                     + "wymagania_systemowe.system_operacyjny from produkty join zdjecia on produkty.id_produktu = zdjecia.id_produktu join producenci on "
                     + "produkty.id_producenta = producenci.id_producenta join platformy on produkty.id_platformy = platformy.id_platformy join wymagania_systemowe on produkty.id_wymagan = "
-                    + "wymagania_systemowe.id_wymagan join klucze on produkty.id_produktu = klucze.id_produktu where produkty.id_produktu = " + product + " group by produkty.nazwa, produkty.opis, klucze.cena,"
+                    + "wymagania_systemowe.id_wymagan join klucze on produkty.id_produktu = klucze.id_produktu where produkty.id_produktu = " + product + "and login is NULL group by produkty.nazwa, produkty.opis, klucze.cena,"
                     + "zdjecia.okladka, zdjecia.zdjecie1, zdjecia.zdjecie2, zdjecia.zdjecie3, producenci.nazwa, platformy.nazwa, wymagania_systemowe.procesor, wymagania_systemowe.karta_graficzna,"
                     + " wymagania_systemowe.pamiec_ram, wymagania_systemowe.dysk, wymagania_systemowe.system_operacyjny;");
 
@@ -124,10 +125,16 @@
 
             ResultSet offer = dbc.ExecuteQuery("select distinct produkty.nazwa, produkty.id_produktu, klucze.cena, zdjecia.okladka, zdjecia.tlo from produkty join klucze on produkty.id_produktu"
                     + " = klucze.id_produktu join zdjecia on zdjecia.id_produktu = produkty.id_produktu where produkty.id_produktu in (" + random.get(0) + "," + random.get(1) + "," + random.get(2) + ")");
-            result.next();
+
+            if (!result.next()) {
+        %>
+        <h1>Produkt obecnie jest niedostępny</h1>
+        <a href="">Poszukaj innych</a>
+        <%} else {
+
         %>
 
-
+        <% do {%>
         <section class="productView">
             <div class="imgField">
                 <img src="<%=result.getString("okladka")%>" alt="">
@@ -234,7 +241,8 @@
             </div>
         </section>
 
-
+        <% } while (result.next());
+      }%>
         <footer>
             <div class="footerContent">
                 <div class="firstHalf">
