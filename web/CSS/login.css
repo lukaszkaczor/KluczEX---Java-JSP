@@ -119,7 +119,7 @@ span {
 }
 
 .loginInfo{
-    color: red;
+    color: #333;
     font-size: 25px;
     position: absolute; 
     bottom: 25%;

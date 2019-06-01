@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%@ page language="java" contentType="text/html; charset=UTF-8"
+             pageEncoding="UTF-8"%>
+    <%@ page errorPage="error.jsp" %>  
+    <%
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
+    %>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/navbar.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/profile.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </head>
+
+    <body>
+        <div class="navbar">
+            <div class="nav">
+                <div class="logo">
+                    <a href="../index.html" class="logoText">KluczEx</a>
+                </div>
+
+                <form action="" class="search">
+                    <input class="searchInput" type="text" name="textInput" placeholder="Szukaj...">
+                    <button type="submit" class="searchButton"><i class="fas fa-search"></i></button>
+                </form>
+
+                <div class="navigation">
+                    <a href="" class="link"><i class="fas fa-shopping-basket"></i></i>&nbsp 0</a>
+                    <div class="btn-group">
+                        <a href="<%=request.getContextPath()%>/profile.jsp" type="" class="btn  link">Profil</a>
+                        <button type="button" class="btn dropdown-toggle dropdown-toggle-split link" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item bt" href="<%=request.getContextPath()%>/HTML/keyList.jsp">Historia zakupów</a>
+                            <!--                <a class="dropdown-item bt" href="#">Another action</a>
+                                            <a class="dropdown-item bt" href="#">Something else here</a>-->
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">
+                                <form action="" method="post">
+                                    <input class="dropdown-item bt"  type="submit" value="Wyloguj">
+                                </form>
+
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="profile">
+            <form action="<%=request.getContextPath()%>/PasswordChangeServlet" method="POST">
+                <h2>Zmiana hasła</h2>
+                <input class="changeInput" type="password" name="oldPassword" placeholder="Obecne hasło" required>
+                <input class="changeInput" type="password" name="newPassword" placeholder="Nowe hasło" required>
+                <input class="changeInput" type="password" name="confirmPassword" placeholder="Powtórz hasło" required>
+                <input class="changeBtn" type="submit" value="Zmień hasło">
+                <%if (request.getAttribute("errorMessage") != null) {%>
+                <h4 style="margin-top: 50px;" class="loginInfo"><%= request.getAttribute("errorMessage")%></h4>
+                <%}%>
+            </form>
+
+
+                <form action="<%=request.getContextPath()%>/EmailChangeServlet" method="POST">
+                    <h2>Zmiana adresu email</h2>
+                <input class="changeInput" type="email" name="oldEmail" placeholder="Obecny email">
+                <input class="changeInput" type="email" name="newEmail" placeholder="Nowy email">
+
+                <input class="changeBtn" type="submit" value="Zmień email">
+                <%if (request.getAttribute("emailMessage") != null) {%>
+                <h4 style="margin-top: 50px;" class="loginInfo"><%= request.getAttribute("emailMessage")%></h4>
+                <%}%>
+            </form>
+
+            <form action="">
+                <h3>Pokaż informacje</h3>
+                <h6>Wyślij na email wszystkie informacje powiązane z tym kontem</h6>
+                <input type="submit" class="changeBtn">
+
+            </form>
+
+        </section>
+
+    </body>
+</html>

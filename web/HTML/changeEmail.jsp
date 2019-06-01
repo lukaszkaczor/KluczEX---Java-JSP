@@ -1,5 +1,5 @@
-<%@page import="kluczex.DBConnection"%>
 <%@page import="java.sql.ResultSet"%>
+<%@page import="kluczex.DBConnection"%>
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
@@ -7,6 +7,7 @@
     response.setCharacterEncoding("UTF-8");
     request.setCharacterEncoding("UTF-8");
 %>
+
 <html lang="en">
 
     <head>
@@ -28,33 +29,34 @@
             <a href="<%=request.getContextPath()%>/index.jsp" class="logoText">KluczEx</a>
         </div>
 
-        <form action="<%=request.getContextPath()%>/RegistrationServlet" method="post">
-            <h1>Utwórz konto</h1>
-            <div class="line"</div>
-            <label for="login"><i class="fas fa-user"></i></label>
-            <input id="login" name="username" type="text" placeholder="Login" required>
+        <form action="<%=request.getContextPath()%>/ConfirmEmailServlet" method="POST">
+            <h1>Zmień adres email</h1>
+            <h5 style="text-align: center">Na twój adres mailowy został wysłany klucz weryfikacyjny</h5>
+            <div class="line">
+                <label for="oldEmail"><i class="fas fa-at"></i></label>
+                <input  name="oldEmail" type="text" placeholder="Email" required>
             </div>
 
             <div class="line">
-                <label for="email"><i class="fas fa-at"></i></label>
-                <input id="email" name="email" type="text" placeholder="Email" required>
+                <label for="newEmail"><i class="fas fa-at"></i></label>
+                <input  name="newEmail" type="text" placeholder="Potwierdź nowy email" required>
             </div>
 
             <div class="line">
-                <label for="password"><i class="fas fa-lock"></i></label>
-                <input id="password" name="password" type="password" placeholder="Hasło" required>
+                <label for="key"><i class="fas fa-lock"></i></label>
+                <input name="key" type="text" placeholder="Klucz" required>
             </div>
 
-            <div class="line">
-                <label for="confirmPassword"><i class="fas fa-lock"></i></label>
-                <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Powtórz hasło" required>
-            </div>
-
-            <input class="btnLogin" type="submit" value="Zarejestruj">
+            <%if (request.getAttribute("errorMessage") != null) {%>
+            <h4 style="margin-top: 50px;" class="loginInfo"><%= request.getAttribute("errorMessage")%></h4>
+            <%}%>
+      
+            <input class="btnLogin" type="submit" value="Zmień">
+            
         </form>
 
-        <%if (request.getAttribute("errorMessage") != null) {%>
-        <h2 class="loginInfo"><%= request.getAttribute("errorMessage")%></h2>
-        <%}%>
     </body>
+
+
+
 </html>

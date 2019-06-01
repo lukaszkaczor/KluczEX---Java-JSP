@@ -36,7 +36,7 @@
             </div>
 
             <div class="line">
-                <label for="email"><i class="fas fa-at"></i></i></label>
+                <label for="email"><i class="fas fa-at"></i></label>
                 <input id="email" name="email" type="text" placeholder="Email" required>
             </div>
 

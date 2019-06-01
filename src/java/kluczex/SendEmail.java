@@ -16,7 +16,7 @@ import javax.mail.internet.MimeMultipart;
 
 
 public class SendEmail {
-    public static void sendMail(String to, String subject, String msg) throws MessagingException {
+    public static void sendMail(String from, String password, String to, String subject, String msg) throws MessagingException {
         System.out.println("Przygotowywanie maila");
         Properties prop = new Properties();
         prop.put("mail.smtp.auth", true);
@@ -25,19 +25,19 @@ public class SendEmail {
         prop.put("mail.smtp.port", "25");
         prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 
-        String myAccount = "sklep.kluczex@gmail.com";
-        String password = "Hurtownia1";
+//        String myAccount = "sklep.kluczex@gmail.com";
+//        String password = "Hurtownia1";
 
         Session session = Session.getInstance(prop, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(myAccount, password);
+                return new PasswordAuthentication(from, password);
             }
         });
 
 
         Message message = new MimeMessage(session);
-        message.setFrom(new InternetAddress("sklep.kluczex@gmail.com"));
+        message.setFrom(new InternetAddress(from));
         message.setRecipients(
                 Message.RecipientType.TO, InternetAddress.parse(to));
         message.setSubject(subject);

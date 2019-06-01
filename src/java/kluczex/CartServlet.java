@@ -91,7 +91,7 @@ public class CartServlet extends HttpServlet {
         try {
             //wysylanie maila
             // do zrobienia
-            SendEmail.sendMail(email.getString("email"), "KluczEX", textToSend);
+            SendEmail.sendMail("sklep.kluczex@gmail.com","Hurtownia1",email.getString("email"), "KluczEX", textToSend);
         } catch (MessagingException ex) {
             Logger.getLogger(CartServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

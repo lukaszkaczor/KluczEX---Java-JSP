@@ -3,13 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/ProjektGrupowy/Kluczex/web/CSS/transactionSucc.css</file>
-            <file>file:/E:/ProjektGrupowy/Kluczex/web/index.jsp</file>
-            <file>file:/E:/ProjektGrupowy/Kluczex/src/java/kluczex/DBConnection.java</file>
-            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/transactionSucc.jsp</file>
-            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/cart.jsp</file>
-            <file>file:/E:/ProjektGrupowy/Kluczex/src/java/kluczex/SendEmail.java</file>
-            <file>file:/E:/ProjektGrupowy/Kluczex/src/java/kluczex/CartServlet.java</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/product.jsp</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/src/java/kluczex/EmailChangeServlet.java</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/login.jsp</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/registration.jsp</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/changeEmail.jsp</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/src/java/kluczex/ConfirmEmailServlet.java</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/profile.jsp</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/src/java/kluczex/PasswordChangeServlet.java</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/web/CSS/login.css</file>
         </group>
     </open-files>
 </project-private>

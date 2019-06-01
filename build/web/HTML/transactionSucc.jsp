@@ -32,15 +32,15 @@
           <div class="navigation">
             <a href="" class="link"><i class="fas fa-shopping-basket"></i></i>&nbsp 0</a>
             <div class="btn-group">
-              <a href="/HTML/login.html" type="" class="btn  link">Profil</a>
+              <a href="<%=request.getContextPath()%>/profile.jsp" type="" class="btn  link">Profil</a>
               <button type="button" class="btn dropdown-toggle dropdown-toggle-split link" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 <span class="sr-only">Toggle Dropdown</span>
               </button>
               <div class="dropdown-menu">
-                <a class="dropdown-item bt" href="#">Action</a>
-                <a class="dropdown-item bt" href="#">Another action</a>
-                <a class="dropdown-item bt" href="#">Something else here</a>
+                <a class="dropdown-item bt" href="<%=request.getContextPath()%>/HTML/keyList.jsp">Historia zakupów</a>
+<!--                <a class="dropdown-item bt" href="#">Another action</a>
+                <a class="dropdown-item bt" href="#">Something else here</a>-->
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">
                   <form action="" method="post">
@@ -57,7 +57,7 @@
       <section class="content">
         <h1>Zakup udany!</h1>
         <h2>Klucze zostały wysłane na email</h2>
-        <a href="">Przejdź do listy zakupionych kluczy</a>
+        <a href="<%=request.getContextPath()%>/HTML/keyList.jsp">Przejdź do listy zakupionych kluczy</a>
       </section>
 </body>
 
