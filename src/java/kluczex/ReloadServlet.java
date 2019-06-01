@@ -11,6 +11,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "ReloadServlet", urlPatterns = {"/ReloadServlet"})
 public class ReloadServlet extends HttpServlet {
@@ -18,19 +19,29 @@ public class ReloadServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Cookie cookie = null;
-        Cookie[] cookies = null;
-        cookies = request.getCookies();
+//        Cookie cookie = null;
+//        Cookie[] cookies = null;
+//        cookies = request.getCookies();
+//        String user = null;
+//        Boolean isLoggedIn = false;
+//        if (cookies != null) {
+//            for (int i = 0; i < cookies.length; i++) {
+//                if (cookies[i].getName().equals("username")) {
+//                    isLoggedIn = true;
+//                    user = cookies[i].getValue();
+//                }
+//            }
+//        }
+        HttpSession session = request.getSession();
         String user = null;
         Boolean isLoggedIn = false;
-        if (cookies != null) {
-            for (int i = 0; i < cookies.length; i++) {
-                if (cookies[i].getName().equals("username")) {
-                    isLoggedIn = true;
-                    user = cookies[i].getValue();
-                }
-            }
+        user = (String)session.getAttribute("user");
+        
+        if(user!=null)
+        {
+            isLoggedIn = true;
         }
+
 
         String[] productID = request.getParameterValues("productID");
         String[] quantity = request.getParameterValues("quantity");

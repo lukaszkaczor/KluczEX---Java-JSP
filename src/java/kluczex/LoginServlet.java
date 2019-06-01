@@ -14,6 +14,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
@@ -31,9 +32,11 @@ public class LoginServlet extends HttpServlet {
 
             if (result.next()) {
                 if (password.equals(result.getString("haslo"))) {
-                    Cookie cookie = new Cookie("username", username);
-                    response.addCookie(cookie);
-
+                  //  Cookie cookie = new Cookie("username", username);
+                 //   response.addCookie(cookie);
+                 HttpSession session = request.getSession(true);
+                 session.setAttribute("user", username);
+                    
                     if (result.getBoolean("administrator")) {
                         response.sendRedirect("index.jsp");
                     } else {

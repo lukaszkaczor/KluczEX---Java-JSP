@@ -39,7 +39,10 @@ input[type=number]::-webkit-outer-spin-button {
     justify-content: flex-start;
     flex: 1.5;
 }
-
+.imgField img{
+    width: 95%;
+    height: 100%;
+}
 .infoField {
     display: flex;
     flex-wrap: wrap;
@@ -182,6 +185,10 @@ input[type=number]::-webkit-outer-spin-button {
     flex-basis: 60%;
     margin: 70px 0 90px 0;
 
+}
+
+.carousel{
+    width: 60vw;
 }
 
 .carousel-inner {

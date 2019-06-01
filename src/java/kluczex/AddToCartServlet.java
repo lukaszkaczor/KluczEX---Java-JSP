@@ -18,6 +18,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "AddToCartServlet", urlPatterns = {"/AddToCartServlet"})
 public class AddToCartServlet extends HttpServlet {
@@ -29,19 +30,29 @@ public class AddToCartServlet extends HttpServlet {
         String productID = request.getParameter("productID");
         String quantity = request.getParameter("quantity");
 
-        Cookie cookie = null;
-        Cookie[] cookies = null;
-        cookies = request.getCookies();
+//        Cookie cookie = null;
+//        Cookie[] cookies = null;
+//        cookies = request.getCookies();
+//        String user = null;
+        HttpSession session = request.getSession();
         String user = null;
         Boolean isLoggedIn = false;
-        if (cookies != null) {
-            for (int i = 0; i < cookies.length; i++) {
-                if (cookies[i].getName().equals("username")) {
-                    isLoggedIn = true;
-                    user = cookies[i].getValue();
-                }
-            }
+        user = (String)session.getAttribute("user");
+        
+        if(user!=null)
+        {
+            isLoggedIn = true;
         }
+
+      
+//        if (cookies != null) {
+//            for (int i = 0; i < cookies.length; i++) {
+//                if (cookies[i].getName().equals("username")) {
+//                    isLoggedIn = true;
+//                    user = cookies[i].getValue();
+//                }
+//            }
+//        }
 
         if (!isLoggedIn) {
             response.sendRedirect("HTML/login.jsp");

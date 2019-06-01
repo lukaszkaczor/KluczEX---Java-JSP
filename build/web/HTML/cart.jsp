@@ -23,19 +23,28 @@
     <body>
 
         <%
-            Cookie cookie = null;
-            Cookie[] cookies = null;
-            cookies = request.getCookies();
-            String user = null;
-            Boolean isLoggedIn = false;
-            if (cookies != null) {
-                for (int i = 0; i < cookies.length; i++) {
-                    if (cookies[i].getName().equals("username")) {
-                        isLoggedIn = true;
-                        user = cookies[i].getValue();
-                    }
-                }
-            }
+//            Cookie cookie = null;
+//            Cookie[] cookies = null;
+//            cookies = request.getCookies();
+//            String user = null;
+//            Boolean isLoggedIn = false;
+//            if (cookies != null) {
+//                for (int i = 0; i < cookies.length; i++) {
+//                    if (cookies[i].getName().equals("username")) {
+//                        isLoggedIn = true;
+//                        user = cookies[i].getValue();
+//                    }
+//                }
+//            }
+
+        String user = null;
+        Boolean isLoggedIn = false;
+        user = (String)session.getAttribute("user");
+        
+        if(user!=null)
+        {
+            isLoggedIn = true;
+        }
             DBConnection dbc = new DBConnection();
             ResultSet result = dbc.ExecuteQuery("select login, produkty.id_produktu, produkty.nazwa, sum(ilosc) as ilosc, okladka, cena_za_sztuke from koszyk join produkty on koszyk.id_produktu = "
                     + "produkty.id_produktu join zdjecia on zdjecia.id_produktu = produkty.id_produktu where login = '" + user + "' group by login, produkty.id_produktu, nazwa, cena_za_sztuke, okladka;");

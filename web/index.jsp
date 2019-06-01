@@ -26,19 +26,26 @@
 
     </head>
     <%
-        Cookie cookie = null;
-        Cookie[] cookies = null;
-        cookies = request.getCookies();
+       // Cookie cookie = null;
+       // Cookie[] cookies = null;
+     //   cookies = request.getCookies();
         String user = null;
         Boolean isLoggedIn = false;
-        if (cookies != null) {
-            for (int i = 0; i < cookies.length; i++) {
-                if (cookies[i].getName().equals("username")) {
-                    isLoggedIn = true;
-                    user = cookies[i].getValue();
-                }
-            }
+        user = (String)session.getAttribute("user");
+        
+        if(user!=null)
+        {
+            isLoggedIn = true;
         }
+//        if (cookies != null) {
+//            for (int i = 0; i < cookies.length; i++) {
+//                if (cookies[i].getName().equals("username")) {
+//                    isLoggedIn = true;
+//                    user = cookies[i].getValue();
+//                }
+//            }
+//        }
+
 
         DBConnection dbc = new DBConnection();
         ResultSet result = dbc.ExecuteQuery("select distinct produkty.nazwa, produkty.id_produktu, klucze.cena, zdjecia.okladka from produkty join klucze on produkty.id_produktu = klucze.id_produktu join zdjecia on produkty.id_produktu = zdjecia.id_produktu where cena<50 limit 24;");

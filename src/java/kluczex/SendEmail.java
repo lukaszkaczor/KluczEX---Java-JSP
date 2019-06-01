@@ -16,7 +16,7 @@ import javax.mail.internet.MimeMultipart;
 
 
 public class SendEmail {
-    public static void sendMail(String recepient) throws MessagingException {
+    public static void sendMail(String to, String subject, String msg) throws MessagingException {
         System.out.println("Przygotowywanie maila");
         Properties prop = new Properties();
         prop.put("mail.smtp.auth", true);
@@ -39,10 +39,10 @@ public class SendEmail {
         Message message = new MimeMessage(session);
         message.setFrom(new InternetAddress("sklep.kluczex@gmail.com"));
         message.setRecipients(
-                Message.RecipientType.TO, InternetAddress.parse("racecar90210@gmail.com"));
-        message.setSubject("Mail Subject");
+                Message.RecipientType.TO, InternetAddress.parse(to));
+        message.setSubject(subject);
 
-        String msg = recepient;
+//        String msg = msg;
 
         MimeBodyPart mimeBodyPart = new MimeBodyPart();
         mimeBodyPart.setContent(msg, "text/html");

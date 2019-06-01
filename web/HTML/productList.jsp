@@ -23,19 +23,29 @@
         <link rel="shortcut icon" href="img/KluczEx.png" />
     </head>
     <%
-        Cookie cookie = null;
-        Cookie[] cookies = null;
-        cookies = request.getCookies();
+//        Cookie cookie = null;
+//        Cookie[] cookies = null;
+//        cookies = request.getCookies();
+//        String user = null;
+//        Boolean isLoggedIn = false;
+//        if (cookies != null) {
+//            for (int i = 0; i < cookies.length; i++) {
+//                if (cookies[i].getName().equals("username")) {
+//                    isLoggedIn = true;
+//                    user = cookies[i].getValue();
+//                }
+//            }
+//        }
+
         String user = null;
         Boolean isLoggedIn = false;
-        if (cookies != null) {
-            for (int i = 0; i < cookies.length; i++) {
-                if (cookies[i].getName().equals("username")) {
-                    isLoggedIn = true;
-                    user = cookies[i].getValue();
-                }
-            }
+        user = (String)session.getAttribute("user");
+        
+        if(user!=null)
+        {
+            isLoggedIn = true;
         }
+        
         DBConnection dbc = new DBConnection();
         ResultSet ilosc = dbc.ExecuteQuery("select sum(ilosc) as suma from koszyk where login ='" + user + "'");
         ilosc.next();
