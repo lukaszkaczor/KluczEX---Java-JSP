@@ -12,19 +12,19 @@
     -webkit-appearance: none;
 }
 
-:root {
+/*:root {
     --primaryColor: #EEEEEE;
     --secondaryColor: #FFFFFF;
     --fontColor: #333;
-    /* --fontColor: #262626; */
-}
+     --fontColor: #262626; 
+}*/
 
 body {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     padding-top: 100px;
-    background: var(--primaryColor);
+    background: #EEEEEE;
 }
 
 
@@ -34,7 +34,7 @@ body {
     flex-basis: 60%;
     align-items: flex-end;
     font-family: 'Roboto', sans-serif;
-    color: var(--fontColor);
+    color: #333;
 
 }
 
@@ -64,7 +64,7 @@ body {
     font-family: 'Roboto', sans-serif;
     align-items: center;
     font-size: 18px;
-    color: var(--fontColor);
+    color: #333;
 }
 
 .carousel {
@@ -117,7 +117,7 @@ body {
 .back {
     backface-visibility: hidden;
     transform: rotateY(180deg);
-    background: var(--fontColor);
+    background: #333;
     position: absolute;
     top: 0;
     left: 0;
@@ -141,7 +141,7 @@ body {
     flex: 3;
     text-align: center;
     font-size: 16px;
-    color: var(--primaryColor);
+    color: #FFF;
     padding: 40px 20px 0 20px;
 }
 
@@ -150,7 +150,7 @@ body {
     text-align: center;
     border-radius: 0 0 10px 10px;
     font-size: 16px;
-    color: var(--primaryColor);
+    color: #FFF;
 }
 
 /*platformy*/
@@ -193,7 +193,7 @@ body {
     bottom: 0;
     width: 100%;
     text-align: center;
-    color: var(--primaryColor);
+    color: #FFF;
     font-size: 20px;
 }
 
@@ -230,7 +230,7 @@ body {
 .box {
     width: 9rem;
     height: 12.5rem;
-    background: var(--fontColor);
+    background: #333;
     display: block;
     border-radius: 25px;
     position: relative;
@@ -254,7 +254,7 @@ body {
     flex: 3;
     text-align: center;
     font-size: 16px;
-    color: var(--primaryColor);
+    color: #FFF;
     padding: 40px 20px 0 20px;
 }
 
@@ -263,7 +263,7 @@ body {
     text-align: center;
     border-radius: 0 0 10px 10px;
     font-size: 16px;
-    color: var(--primaryColor);
+    color: #EEEEEE;
 }
 
 .box h1 {
@@ -284,7 +284,7 @@ body {
 }
 
 .whiteBg {
-    background: var(--secondaryColor);
+    background: #FFF;
     display: flex;
     justify-content: center;
     width: 100%;
@@ -297,18 +297,18 @@ body {
 
 #btnMore,
 #btnMore2 {
-    background: var(--primaryColor);
+    background: #EEE;
     padding: 10px 20px;
     border-radius: 5px;
     text-decoration: none;
-    color: var(--fontColor);
+    color: #333;
     border: none;
     cursor: pointer;
 }
 
 #btnMore2,
 #btnRedirect2 {
-    background: var(--secondaryColor);
+    background: #FFF;
 }
 /* rozsuwane listy gier koniec*/
 
@@ -317,7 +317,7 @@ footer{
     display: flex;
     justify-content: center;
     height: 40vh;
-    background: var(--fontColor);
+    background: #333;
     width: 100%;
 }
 
@@ -330,7 +330,7 @@ footer{
     display: flex;
     height: 50%;
     width: 100%;
-    border-bottom: 1px solid var(--primaryColor);
+    border-bottom: 1px solid #EEE;
     justify-content: space-between;
     align-items: center;
 }
@@ -343,7 +343,7 @@ footer{
 
 .firstHalf h1{
     font-size: 18px;
-    color: var(--secondaryColor);
+    color: #FFF;
 }
 
 .firstHalf a{
@@ -364,13 +364,13 @@ footer{
 }
 
 .footerPaymentMethods h1, .footerFollowUs h1{
-    color: var(--secondaryColor);
+    color: #FFF;
     width: 100%;
     font-size: 25px;
 }
 
 .footerPaymentMethods a, .footerFollowUs a{
-    color: var(--secondaryColor);
+    color: #FFF;
     font-size: 50px;
     padding-right: 23px;
     transition: .5s;

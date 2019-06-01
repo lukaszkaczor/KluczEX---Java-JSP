@@ -11,19 +11,19 @@
     outline: 0px !important;
     -webkit-appearance: none;
 }
-:root {
+/*:root {
     --primaryColor: #EEEEEE;
     --secondaryColor: #FFFFFF;
     --fontColor: #333;
-    /* --fontColor: #262626; */
-}
+     --fontColor: #262626; 
+}*/
 
 /*navbar*/
 .navbar {
     display: flex;
     width: 100%;
     height: 90px;
-    background: var(--secondaryColor);
+    background: #FFFFFF;
     justify-content: center;
     position: fixed;
     top: 0;
@@ -40,7 +40,7 @@
     display: flex;
     flex: 1;
     align-items: center;
-    color: var(--secondaryColor);
+    color: #FFFFFF;
     width: 60%;
 }
 
@@ -49,19 +49,19 @@
     font-family: 'Roboto', sans-serif;
     padding: 3px 20px;
     font-size: 35px;
-    border: 2px solid var(--secondaryColor);
+    border: 2px solid #FFFFFF;
     border-radius: 1px;
     box-shadow: 0px 0px 0px 4px rgba(51, 51, 51, 1);
     font-family: 'Roboto', sans-serif;
-    color: var(--secondaryColor);
+    color:#FFFFFF;
     transition: .5s;
 }
 
 
 .logoText:hover {
     cursor: pointer;
-    background-color: var(--secondaryColor);
-    color: var(--fontColor);
+    background-color: #FFFFFF;
+    color: #333;
     text-decoration: none;
 }
 
@@ -77,8 +77,8 @@
     height: 50px;
     padding: 0 15px 0 25px;
     border-radius: 25px 0 0 25px;
-    background: var(--primaryColor);
-    color: var(--fontColor);
+    background: #EEEEEE;
+    color: #333;
     font-size: 18px;
     outline: none;
     border: none;
@@ -90,8 +90,8 @@
     justify-content: center;
     height: 50px;
     border-radius: 0 25px 25px 0;
-    background: var(--primaryColor);
-    color: var(--fontColor);
+    background: #EEEEEE;
+    color: #333;
     outline: none;
     border: none;
     font-size: 18px;
@@ -113,9 +113,9 @@
 
 .link {
     padding: 15px;
-    background: var(--primaryColor);
+    background: #EEEEEE;
     text-decoration: none;
-    color: var(--fontColor);
+    color: #333;
     margin-left: 1rem;
     border-radius: 25px;
     font-size: 16px;
@@ -125,8 +125,8 @@
 }
 
 .link:hover {
-    background: var(--fontColor);
-    color: var(--primaryColor);
+    background: #333;
+    color:#EEEEEE;
     text-decoration: none;
 }
 
@@ -134,8 +134,8 @@
 
 
 .dropbtn {
-    background-color: var(--primaryColor);
-    color: var(--fontColor);
+    background-color:#EEEEEE;
+    color: #333;
     padding: 16px;
     font-size: 16px;
     border: none;
@@ -164,7 +164,7 @@
     display: none;
     /* left: 15px; */
     position: absolute;
-    background-color: var(--primaryColor);
+    background-color: #EEEEEE;
     /* min-width: 10px; */
     width: 150px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);

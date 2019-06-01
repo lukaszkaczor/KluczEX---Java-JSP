@@ -80,9 +80,13 @@ public class CartServlet extends HttpServlet {
             Logger.getLogger(CartServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        //wysylanie maila 
-        // do zrobienia
-        
+        try {
+            //wysylanie maila
+            // do zrobienia
+            SendEmail.sendMail(textToSend);
+        } catch (MessagingException ex) {
+            Logger.getLogger(CartServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
         response.sendRedirect("HTML/cart.jsp");
     }
 

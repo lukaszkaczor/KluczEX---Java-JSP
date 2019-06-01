@@ -12,14 +12,14 @@
     -webkit-appearance: none;
 }
 
-:root {
+/*:root {
     --primaryColor: #EEEEEE;
     --secondaryColor: #FFFFFF;
     --fontColor: #333;
-}
+}*/
 
 body {
-    background: var(--secondaryColor);
+    background: #FFFFFF;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -35,7 +35,7 @@ form {
     /* flex-basis: 12%; */
     width: 23%;
     height: 30rem;
-    background: var(--primaryColor);
+    background: #EEEEEE;;
     margin-top: 120px;
 }
 
@@ -50,7 +50,7 @@ form {
     align-items: flex-end;
     justify-content: center;
     height: 100%;
-    color: var(--fontColor);
+    color: #333;
     padding: 10px;
 }
 
@@ -61,17 +61,17 @@ form {
 }
 
 .line {
-    background: var(--secondaryColor);
-    border: 1px solid var(--fontColor)
+    background: #FFFFFF;
+    border: 1px solid #333;
 }
 
 .btnLogin {
     width: 47%;
     height: 50px;
     text-transform: uppercase;
-    background: var(--fontColor);
+    background: #333;
     border: none;
-    color: var(--secondaryColor)
+    color: #FFFFFF;
 }
 
 .btnLogin:hover {
@@ -80,12 +80,12 @@ form {
 
 form a {
     text-decoration: none;
-    color: var(--fontColor)
+    color: #333;
 }
 
 form a:hover {
     text-decoration: underline;
-    color: var(--fontColor)
+    color: #333;
 }
 
 .logo {
@@ -99,8 +99,8 @@ form a:hover {
 .logoText {
     background: #333;
     font-family: 'Roboto', sans-serif;
-    color: var(--secondaryColor);
-    border: 2px solid var(--secondaryColor);
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
     border-radius: 1px;
     box-shadow: 0px 0px 0px 4px rgba(51, 51, 51, 1);
     padding: 5px 10px;
@@ -110,8 +110,8 @@ form a:hover {
 
 .logoText:hover {
     cursor: pointer;
-    background-color: var(--secondaryColor);
-    color: var(--fontColor);
+    background-color: #FFFFFF;
+    color: #333;
 }
 
 span {
