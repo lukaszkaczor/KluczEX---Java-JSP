@@ -14,6 +14,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="shortcut icon" href="img/KluczEx.png" />
         <title>KluczEx</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/style.css">
@@ -37,22 +38,22 @@
                 <input  name="email" type="text" placeholder="Email" required>
             </div>
 
-<!--            <div class="line">
-                <label for="newEmail"><i class="fas fa-at"></i></label>
-                <input  name="newEmail" type="text" placeholder="Potwierdź nowy email" required>
-            </div>
-
-            <div class="line">
-                <label for="key"><i class="fas fa-lock"></i></label>
-                <input name="key" type="text" placeholder="Klucz" required>
-            </div>-->
+            <!--            <div class="line">
+                            <label for="newEmail"><i class="fas fa-at"></i></label>
+                            <input  name="newEmail" type="text" placeholder="Potwierdź nowy email" required>
+                        </div>
+            
+                        <div class="line">
+                            <label for="key"><i class="fas fa-lock"></i></label>
+                            <input name="key" type="text" placeholder="Klucz" required>
+                        </div>-->
 
             <%if (request.getAttribute("errorMessage") != null) {%>
             <h4 style="margin-top: 50px;" class="loginInfo"><%= request.getAttribute("errorMessage")%></h4>
             <%}%>
-      
+
             <input class="btnLogin" type="submit" value="Wyślij">
-            
+
         </form>
 
     </body>

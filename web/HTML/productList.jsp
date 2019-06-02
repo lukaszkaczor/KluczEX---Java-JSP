@@ -13,6 +13,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="shortcut icon" href="img/KluczEx.png" />
         <title>KluczEx</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/style.css">
@@ -39,13 +40,12 @@
 
         String user = null;
         Boolean isLoggedIn = false;
-        user = (String)session.getAttribute("user");
-        
-        if(user!=null)
-        {
+        user = (String) session.getAttribute("user");
+
+        if (user != null) {
             isLoggedIn = true;
         }
-        
+
         DBConnection dbc = new DBConnection();
         ResultSet ilosc = dbc.ExecuteQuery("select sum(ilosc) as suma from koszyk where login ='" + user + "'");
         ilosc.next();
@@ -57,45 +57,45 @@
     <%
         if (isLoggedIn) {
     %>
-                 <div class="navbar">
-            <div class="nav">
-                <div class="logo">
-                    <a href="<%=request.getContextPath()%>/index.jsp" class="logoText">KluczEx</a>
-                </div>
+    <div class="navbar">
+        <div class="nav">
+            <div class="logo">
+                <a href="<%=request.getContextPath()%>/index.jsp" class="logoText">KluczEx</a>
+            </div>
 
-                <form action="<%=request.getContextPath()%>/HTML/productList.jsp" class="search">
-                    <input class="searchInput" type="text" name="textInput" placeholder="Szukaj...">
-                    <button type="submit" class="searchButton"><i class="fas fa-search"></i></button>
-                </form>
+            <form action="<%=request.getContextPath()%>/HTML/productList.jsp" class="search">
+                <input class="searchInput" type="text" name="textInput" placeholder="Szukaj...">
+                <button type="submit" class="searchButton"><i class="fas fa-search"></i></button>
+            </form>
 
 
 
-                <div class="navigation">
-                    <a href="<%=request.getContextPath()%>/HTML/cart.jsp" class="link"><i class="fas fa-shopping-basket"></i></i>&nbsp <%=suma%></a>
+            <div class="navigation">
+                <a href="<%=request.getContextPath()%>/HTML/cart.jsp" class="link"><i class="fas fa-shopping-basket"></i></i>&nbsp <%=suma%></a>
 
-                    <div class="btn-group">
-                        <a href="<%=request.getContextPath()%>/HTML/profile.jsp" type="" class="btn  link">Profil</a>
-                        <button type="button" class="btn dropdown-toggle dropdown-toggle-split link" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item bt" href="<%=request.getContextPath()%>/HTML/keyList.jsp">Historia zakupów</a>
-                            <!--<a class="dropdown-item bt" href="#">Action</a>-->
-                            <!--                            <a class="dropdown-item bt" href="#">Another action</a>
-                                                        <a class="dropdown-item bt" href="#">Something else here</a>-->
-                            <div class="dropdown-divider"></div>
-                            <!--<a class="dropdown-item" href="#">-->
-                                <form action="<%=request.getContextPath()%>/LogoutServlet" method="post">
-                                    <input class="dropdown-item bt"  type="submit" value="Wyloguj">
-                                </form>
+                <div class="btn-group">
+                    <a href="<%=request.getContextPath()%>/HTML/profile.jsp" type="" class="btn  link">Profil</a>
+                    <button type="button" class="btn dropdown-toggle dropdown-toggle-split link" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item bt" href="<%=request.getContextPath()%>/HTML/keyList.jsp">Historia zakupów</a>
+                        <!--<a class="dropdown-item bt" href="#">Action</a>-->
+                        <!--                            <a class="dropdown-item bt" href="#">Another action</a>
+                                                    <a class="dropdown-item bt" href="#">Something else here</a>-->
+                        <div class="dropdown-divider"></div>
+                        <!--<a class="dropdown-item" href="#">-->
+                        <form action="<%=request.getContextPath()%>/LogoutServlet" method="post">
+                            <input class="dropdown-item bt"  type="submit" value="Wyloguj">
+                        </form>
 
-                            </a>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     <%
     } else {
     %>
@@ -109,16 +109,15 @@
         String platform = request.getParameter("platform");
         String polecane = request.getParameter("polecane");
         ResultSet result = null;
-        
-        if(polecane!= null){
-             result = dbc.ExecuteQuery("select distinct produkty.nazwa, produkty.id_produktu, klucze.cena, zdjecia.okladka , zdjecia.tlo from zdjecia join produkty on produkty.id_produktu = zdjecia.id_produktu join klucze on klucze.id_produktu = produkty.id_produktu join polecane on polecane.id_produktu = produkty.id_produktu where polecane.id_produktu is not null;");
+
+        if (polecane != null) {
+            result = dbc.ExecuteQuery("select distinct produkty.nazwa, produkty.id_produktu, klucze.cena, zdjecia.okladka , zdjecia.tlo from zdjecia join produkty on produkty.id_produktu = zdjecia.id_produktu join klucze on klucze.id_produktu = produkty.id_produktu join polecane on polecane.id_produktu = produkty.id_produktu where polecane.id_produktu is not null;");
             textInput = "Polecane";
-        }
-        else if (polecane== null && textInput == null && cheaperThan50 != null) {
+        } else if (polecane == null && textInput == null && cheaperThan50 != null) {
             result = dbc.ExecuteQuery("select distinct produkty.nazwa, produkty.id_produktu, klucze.cena, zdjecia.okladka , zdjecia.tlo from zdjecia join produkty on produkty.id_produktu = "
                     + "zdjecia.id_produktu join klucze on klucze.id_produktu = produkty.id_produktu where klucze.cena<50;");
             textInput = "<50zł";
-        } else if (polecane== null && textInput == null && cheaperThan50 == null && category != null) {
+        } else if (polecane == null && textInput == null && cheaperThan50 == null && category != null) {
             result = dbc.ExecuteQuery("select distinct produkty.nazwa, produkty.id_produktu, klucze.cena, zdjecia.okladka , kategorie.nazwa as kn, zdjecia.tlo from zdjecia join produkty on produkty.id_produktu = "
                     + "zdjecia.id_produktu join klucze on klucze.id_produktu = produkty.id_produktu join kategorie on kategorie.id_kategorii = produkty.id_kategorii where produkty.id_kategorii = " + category + ";");
             //  result.next();
@@ -147,13 +146,13 @@
                 textInput = "Karty prepaid";
             }
 
-        } else if (polecane== null &&textInput == null && cheaperThan50 == null && category == null && platform != null) {
+        } else if (polecane == null && textInput == null && cheaperThan50 == null && category == null && platform != null) {
             result = dbc.ExecuteQuery("select distinct produkty.nazwa, produkty.id_produktu, klucze.cena, zdjecia.okladka , platformy.nazwa as pn, zdjecia.tlo from zdjecia join produkty on produkty.id_produktu = "
                     + "zdjecia.id_produktu join klucze on klucze.id_produktu = produkty.id_produktu join platformy on platformy.id_platformy = produkty.id_platformy where produkty.id_platformy = " + platform + ";");
             result.next();
             textInput = result.getString("pn");
 
-        }else {
+        } else {
 
             result = dbc.ExecuteQuery("select distinct produkty.nazwa, produkty.id_produktu, klucze.cena, zdjecia.okladka , zdjecia.tlo from zdjecia join produkty on produkty.id_produktu = "
                     + "zdjecia.id_produktu join klucze on klucze.id_produktu = produkty.id_produktu where lower(nazwa) like (lower('%" + textInput + "%'));");
@@ -185,7 +184,7 @@
 
         <div class="productList">
             <% while (result.next()) {
-                System.out.println("tutaj");
+                    System.out.println("tutaj");
             %>
             <a href="<%=request.getContextPath()%>/HTML/product.jsp?productID=<%=result.getString("id_produktu")%>" class="product">
                 <img class="productFgr"

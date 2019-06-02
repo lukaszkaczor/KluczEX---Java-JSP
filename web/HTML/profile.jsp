@@ -13,7 +13,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
+        <link rel="shortcut icon" href="img/KluczEx.png" />
+        <title>KluczEx</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/navbar.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
@@ -103,11 +104,13 @@
                 <%}%>
             </form>
 
-            <form action="">
+            <form action="<%=request.getContextPath()%>/RODOServlet" method="POST">
                 <h3>Pokaż informacje</h3>
                 <h6>Wyślij na email wszystkie informacje powiązane z tym kontem</h6>
                 <input type="submit" class="changeBtn">
-
+                <%if (request.getAttribute("RODOMessage") != null) {%>
+                <h4 style="margin-top: 50px; text-align: center; " class="loginInfo"><%= request.getAttribute("RODOMessage")%></h4>
+                <%}%>
             </form>
 
         </section>

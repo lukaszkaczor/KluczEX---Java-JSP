@@ -12,7 +12,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
+        <link rel="shortcut icon" href="img/KluczEx.png" />
+        <title>KluczEx</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/navbar.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/transactionSucc.css">
@@ -20,21 +21,21 @@
         <link href="https://fonts.googleapis.com/css?family=Montserrat&amp;subset=latin-ext" rel="stylesheet">
     </head>
     <body>
-                <%
-                            String user = null;
-        Boolean isLoggedIn = false;
-        user = (String) session.getAttribute("user");
+        <%
+            String user = null;
+            Boolean isLoggedIn = false;
+            user = (String) session.getAttribute("user");
 
-        if (user != null) {
-            isLoggedIn = true;
-        }
-         DBConnection dbc = new DBConnection();
+            if (user != null) {
+                isLoggedIn = true;
+            }
+            DBConnection dbc = new DBConnection();
             ResultSet ilosc = dbc.ExecuteQuery("select sum(ilosc) as suma from koszyk where login ='" + user + "'");
             ilosc.next();
             String suma = ilosc.getString("suma");
-                    if (suma == null) {
-            suma = "0";
-        }
+            if (suma == null) {
+                suma = "0";
+            }
         %>
         <div class="navbar">
             <div class="nav">
