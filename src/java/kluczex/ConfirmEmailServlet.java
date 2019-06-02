@@ -51,7 +51,8 @@ public class ConfirmEmailServlet extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("HTML/changeEmail.jsp");
                 rd.forward(request, response);
             } else {
-                dbc.ExecuteUpdate("update uzytkownicy set email = '"+result.getString("nowy_email")+"' where login = '"+user + "'");
+                dbc.ExecuteUpdate("update klucze_weryfikacyjne set zuzyty = true where login = '" + user + "' and klucz_weryfikacyjny ='" + result.getString("klucz_weryfikacyjny") + "'");
+                dbc.ExecuteUpdate("update uzytkownicy set email = '" + result.getString("nowy_email") + "' where login = '" + user + "'");
                 request.setAttribute("errorMessage", "Udało się zmienić adres email");
                 RequestDispatcher rd = request.getRequestDispatcher("HTML/changeEmail.jsp");
                 rd.forward(request, response);

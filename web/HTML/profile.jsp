@@ -1,3 +1,5 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="kluczex.DBConnection"%>
 <!DOCTYPE html>
 <html lang="en">
     <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -21,34 +23,54 @@
     </head>
 
     <body>
+        <%
+            String user = null;
+            Boolean isLoggedIn = false;
+            user = (String) session.getAttribute("user");
+
+            if (user != null) {
+                isLoggedIn = true;
+            }
+            DBConnection dbc = new DBConnection();
+            ResultSet ilosc = dbc.ExecuteQuery("select sum(ilosc) as suma from koszyk where login ='" + user + "'");
+            ilosc.next();
+            String suma = ilosc.getString("suma");
+            if (suma == null) {
+                suma = "0";
+            }
+        %>
         <div class="navbar">
             <div class="nav">
                 <div class="logo">
-                    <a href="../index.html" class="logoText">KluczEx</a>
+                    <a href="<%=request.getContextPath()%>/index.jsp" class="logoText">KluczEx</a>
                 </div>
 
-                <form action="" class="search">
+                <form action="<%=request.getContextPath()%>/HTML/productList.jsp" class="search">
                     <input class="searchInput" type="text" name="textInput" placeholder="Szukaj...">
                     <button type="submit" class="searchButton"><i class="fas fa-search"></i></button>
                 </form>
 
+
+
                 <div class="navigation">
-                    <a href="" class="link"><i class="fas fa-shopping-basket"></i></i>&nbsp 0</a>
+                    <a href="<%=request.getContextPath()%>/HTML/cart.jsp" class="link"><i class="fas fa-shopping-basket"></i></i>&nbsp <%=suma%></a>
+
                     <div class="btn-group">
-                        <a href="<%=request.getContextPath()%>/profile.jsp" type="" class="btn  link">Profil</a>
+                        <a href="<%=request.getContextPath()%>/HTML/profile.jsp" type="" class="btn  link">Profil</a>
                         <button type="button" class="btn dropdown-toggle dropdown-toggle-split link" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item bt" href="<%=request.getContextPath()%>/HTML/keyList.jsp">Historia zakupów</a>
-                            <!--                <a class="dropdown-item bt" href="#">Another action</a>
-                                            <a class="dropdown-item bt" href="#">Something else here</a>-->
+                            <!--<a class="dropdown-item bt" href="#">Action</a>-->
+                            <!--                            <a class="dropdown-item bt" href="#">Another action</a>
+                                                        <a class="dropdown-item bt" href="#">Something else here</a>-->
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">
-                                <form action="" method="post">
-                                    <input class="dropdown-item bt"  type="submit" value="Wyloguj">
-                                </form>
+                            <!--<a class="dropdown-item" href="#">-->
+                            <form action="<%=request.getContextPath()%>/LogoutServlet" method="post">
+                                <input class="dropdown-item bt"  type="submit" value="Wyloguj">
+                            </form>
 
                             </a>
                         </div>
@@ -70,8 +92,8 @@
             </form>
 
 
-                <form action="<%=request.getContextPath()%>/EmailChangeServlet" method="POST">
-                    <h2>Zmiana adresu email</h2>
+            <form action="<%=request.getContextPath()%>/EmailChangeServlet" method="POST">
+                <h2>Zmiana adresu email</h2>
                 <input class="changeInput" type="email" name="oldEmail" placeholder="Obecny email">
                 <input class="changeInput" type="email" name="newEmail" placeholder="Nowy email">
 

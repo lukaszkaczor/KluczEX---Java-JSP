@@ -62,7 +62,7 @@
         <%
             if (isLoggedIn) {
         %>
-        <div class="navbar">
+              <div class="navbar">
             <div class="nav">
                 <div class="logo">
                     <a href="<%=request.getContextPath()%>/index.jsp" class="logoText">KluczEx</a>
@@ -73,22 +73,24 @@
                     <button type="submit" class="searchButton"><i class="fas fa-search"></i></button>
                 </form>
 
+
+
                 <div class="navigation">
                     <a href="<%=request.getContextPath()%>/HTML/cart.jsp" class="link"><i class="fas fa-shopping-basket"></i></i>&nbsp <%=suma2%></a>
 
                     <div class="btn-group">
-                        <a href="<%=request.getContextPath()%>/profile.jsp" type="" class="btn  link">Profil</a>
+                        <a href="<%=request.getContextPath()%>/HTML/profile.jsp" type="" class="btn  link">Profil</a>
                         <button type="button" class="btn dropdown-toggle dropdown-toggle-split link" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu">
-                             <a class="dropdown-item bt" href="<%=request.getContextPath()%>/HTML/keyList.jsp">Historia zakupów</a>
-<!--                            <a class="dropdown-item bt" href="#">Action</a>
-                            <a class="dropdown-item bt" href="#">Another action</a>
-                            <a class="dropdown-item bt" href="#">Something else here</a>-->
+                            <a class="dropdown-item bt" href="<%=request.getContextPath()%>/HTML/keyList.jsp">Historia zakupów</a>
+                            <!--<a class="dropdown-item bt" href="#">Action</a>-->
+                            <!--                            <a class="dropdown-item bt" href="#">Another action</a>
+                                                        <a class="dropdown-item bt" href="#">Something else here</a>-->
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">
+                            <!--<a class="dropdown-item" href="#">-->
                                 <form action="<%=request.getContextPath()%>/LogoutServlet" method="post">
                                     <input class="dropdown-item bt"  type="submit" value="Wyloguj">
                                 </form>
@@ -141,7 +143,6 @@
         <h1>Produkt obecnie jest niedostępny</h1>
         <a href="">Poszukaj innych</a>
         <%} else {
-
         %>
 
         <% do {%>
@@ -181,8 +182,7 @@
                         <div><i class="fas fa-check-circle"></i><strong>&nbsp; Dostępnych <%=result.getString("ilosc")%> sztuk </strong></div>
                         <div><i class="fas fa-envelope"></i>&nbsp; Natychmiastowa wysyłka</div>
                         <div><i class="fas fa-key"></i>&nbsp;  Klucz cyfrowy</div>
-                        <a href=""><i class="fas fa-question"></i>&nbsp; Jak aktywować klucz</a>
-
+                        <a href="https://wyrm.pl/jak-aktywowac-klucz-cyfrowy/"><i class="fas fa-question"></i>&nbsp; Jak aktywować klucz</a>
                     </div>
                 </div>
             </div>

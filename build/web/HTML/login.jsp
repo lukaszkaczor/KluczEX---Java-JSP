@@ -41,7 +41,7 @@
                 <input name="password" type="password" placeholder="Hasło">
             </div>
 
-            <a href="">Zapomniałeś hasła?</a>
+            <a href="<%=request.getContextPath()%>/HTML/resetPassword.jsp">Zapomniałeś hasła?</a>
             <input class="btnLogin" type="submit" value="Zaloguj">
             <a href="registration.jsp">lub <span> UTWÓRZ NOWE KONTO</span></a>
         </form>

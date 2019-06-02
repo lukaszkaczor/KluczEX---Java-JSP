@@ -54,7 +54,7 @@
             if(suma==null) 
                 suma = "0";
         %>
-        <div class="navbar">
+              <div class="navbar">
             <div class="nav">
                 <div class="logo">
                     <a href="<%=request.getContextPath()%>/index.jsp" class="logoText">KluczEx</a>
@@ -71,17 +71,18 @@
                     <a href="<%=request.getContextPath()%>/HTML/cart.jsp" class="link"><i class="fas fa-shopping-basket"></i></i>&nbsp <%=suma%></a>
 
                     <div class="btn-group">
-                        <a href="<%=request.getContextPath()%>/profile.jsp" type="" class="btn link">Profil</a>
+                        <a href="<%=request.getContextPath()%>/HTML/profile.jsp" type="" class="btn  link">Profil</a>
                         <button type="button" class="btn dropdown-toggle dropdown-toggle-split link" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item bt" href="<%=request.getContextPath()%>/HTML/keyList.jsp">Historia zakupów</a>
-<!--                            <a class="dropdown-item bt" href="#">Another action</a>
-                            <a class="dropdown-item bt" href="#">Something else here</a>-->
+                            <!--<a class="dropdown-item bt" href="#">Action</a>-->
+                            <!--                            <a class="dropdown-item bt" href="#">Another action</a>
+                                                        <a class="dropdown-item bt" href="#">Something else here</a>-->
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">
+                            <!--<a class="dropdown-item" href="#">-->
                                 <form action="<%=request.getContextPath()%>/LogoutServlet" method="post">
                                     <input class="dropdown-item bt"  type="submit" value="Wyloguj">
                                 </form>
@@ -92,6 +93,7 @@
                 </div>
             </div>
         </div>
+
 
 
 

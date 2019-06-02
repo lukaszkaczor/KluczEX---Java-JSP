@@ -26,18 +26,10 @@
 
     </head>
     <%
-       // Cookie cookie = null;
-       // Cookie[] cookies = null;
-     //   cookies = request.getCookies();
-        String user = null;
-        Boolean isLoggedIn = false;
-        user = (String)session.getAttribute("user");
-        
-        if(user!=null)
-        {
-            isLoggedIn = true;
-        }
-//        if (cookies != null) {
+        // Cookie cookie = null;
+        // Cookie[] cookies = null;
+        //   cookies = request.getCookies();
+        //        if (cookies != null) {
 //            for (int i = 0; i < cookies.length; i++) {
 //                if (cookies[i].getName().equals("username")) {
 //                    isLoggedIn = true;
@@ -45,18 +37,25 @@
 //                }
 //            }
 //        }
+        String user = null;
+        Boolean isLoggedIn = false;
+        user = (String) session.getAttribute("user");
+
+        if (user != null) {
+            isLoggedIn = true;
+        }
 
 
         DBConnection dbc = new DBConnection();
         ResultSet result = dbc.ExecuteQuery("select distinct produkty.nazwa, produkty.id_produktu, klucze.cena, zdjecia.okladka from produkty join klucze on produkty.id_produktu = klucze.id_produktu join zdjecia on produkty.id_produktu = zdjecia.id_produktu where cena<50 limit 24;");
         List<IndexJSPproduct> cheaperThan50 = new ArrayList();
         int i = 0;
-        ResultSet ilosc = dbc.ExecuteQuery("select sum(ilosc) as suma from koszyk where login ='" + user + "'");
-        ilosc.next();
-        String suma = ilosc.getString("suma");
-        if (suma == null) {
-            suma = "0";
-        }
+//        ResultSet ilosc = dbc.ExecuteQuery("select sum(ilosc) as suma from koszyk where login ='" + user + "'");
+//        ilosc.next();
+//        String suma = ilosc.getString("suma");
+//        if (suma == null) {
+//            suma = "0";
+//        }
     %>
 
     <body>
@@ -64,6 +63,14 @@
             if (isLoggedIn) {
         %>
 
+        <%
+            ResultSet ilosc = dbc.ExecuteQuery("select sum(ilosc) as suma from koszyk where login ='" + user + "'");
+            ilosc.next();
+            String suma = ilosc.getString("suma");
+                    if (suma == null) {
+            suma = "0";
+        }
+        %>
         <div class="navbar">
             <div class="nav">
                 <div class="logo">
@@ -87,10 +94,10 @@
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu">
-                               <a class="dropdown-item bt" href="<%=request.getContextPath()%>/HTML/keyList.jsp">Historia zakupów</a>
+                            <a class="dropdown-item bt" href="<%=request.getContextPath()%>/HTML/keyList.jsp">Historia zakupów</a>
                             <!--<a class="dropdown-item bt" href="#">Action</a>-->
-<!--                            <a class="dropdown-item bt" href="#">Another action</a>
-                            <a class="dropdown-item bt" href="#">Something else here</a>-->
+                            <!--                            <a class="dropdown-item bt" href="#">Another action</a>
+                                                        <a class="dropdown-item bt" href="#">Something else here</a>-->
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">
                                 <form action="<%=request.getContextPath()%>/LogoutServlet" method="post">

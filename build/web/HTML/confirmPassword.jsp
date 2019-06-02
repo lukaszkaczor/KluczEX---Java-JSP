@@ -29,27 +29,27 @@
             <a href="<%=request.getContextPath()%>/index.jsp" class="logoText">KluczEx</a>
         </div>
 
-        <form action="<%=request.getContextPath()%>/LoginServlet" method="post">
-            <h1>Zaloguj</h1>
+        <form action="<%=request.getContextPath()%>/confirmPasswordServlet" method="POST">
+            <h1>Resetowanie hasła</h1>
+            <h5 style="text-align: center">Na twój adres mailowy został wysłany klucz weryfikacyjny</h5>
             <div class="line">
-                <label for="login"><i class="fas fa-user"></i></label>
-                <input  name="username" type="text" placeholder="Login">
+                <label for="email"><i class="fas fa-at"></i></label>
+                <input  name="email" type="text" placeholder="Email" required>
             </div>
 
+
             <div class="line">
-                <label for="password"><i class="fas fa-lock"></i></label>
-                <input name="password" type="password" placeholder="Hasło">
+                <label for="key"><i class="fas fa-lock"></i></label>
+                <input name="key" type="text" placeholder="Klucz" required>
             </div>
 
-            <a href="<%=request.getContextPath()%>/HTML/resetPassword.jsp">Zapomniałeś hasła?</a>
-            <input class="btnLogin" type="submit" value="Zaloguj">
-            <a href="registration.jsp">lub <span> UTWÓRZ NOWE KONTO</span></a>
+            <%if (request.getAttribute("errorMessage") != null) {%>
+            <h4 style="margin-top: 50px;" class="loginInfo"><%= request.getAttribute("errorMessage")%></h4>
+            <%}%>
+      
+            <input class="btnLogin" type="submit" value="Wyślij">
+            
         </form>
-
-
-        <%if (request.getAttribute("errorMessage") != null) {%>
-        <h2 class="loginInfo"><%= request.getAttribute("errorMessage")%></h2>
-        <%}%>
 
     </body>
 
