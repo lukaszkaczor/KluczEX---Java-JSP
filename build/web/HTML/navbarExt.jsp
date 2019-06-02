@@ -11,6 +11,7 @@
 
 
 <div class="navbar">
+    
     <div class="nav">
         <div class="logo">
             <a href="<%=request.getContextPath()%>/index.jsp" class="logoText">KluczEx</a>

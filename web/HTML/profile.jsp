@@ -28,6 +28,10 @@
             String user = null;
             Boolean isLoggedIn = false;
             user = (String) session.getAttribute("user");
+            Boolean admin = (Boolean) session.getAttribute("admin");
+            if (admin == null) {
+                admin = false;
+            }
 
             if (user != null) {
                 isLoggedIn = true;
@@ -64,6 +68,12 @@
                         </button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item bt" href="<%=request.getContextPath()%>/HTML/keyList.jsp">Historia zakupów</a>
+                                                        <%
+                                if (admin) {
+                            %>
+                            <a class="dropdown-item bt" href="<%=request.getContextPath()%>/HTML/admin.jsp">Edytuj proponowane</a>
+                            <%}
+                            %>
                             <!--<a class="dropdown-item bt" href="#">Action</a>-->
                             <!--                            <a class="dropdown-item bt" href="#">Another action</a>
                                                         <a class="dropdown-item bt" href="#">Something else here</a>-->

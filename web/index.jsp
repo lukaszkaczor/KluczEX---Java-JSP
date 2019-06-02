@@ -16,7 +16,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
+
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="CSS/style.css">
         <link rel="stylesheet" href="CSS/navbar.css">
@@ -40,11 +40,14 @@
         String user = null;
         Boolean isLoggedIn = false;
         user = (String) session.getAttribute("user");
+        Boolean admin = (Boolean) session.getAttribute("admin");
+        if (admin == null) {
+            admin = false;
+        }
 
         if (user != null) {
             isLoggedIn = true;
         }
-
 
         DBConnection dbc = new DBConnection();
         ResultSet result = dbc.ExecuteQuery("select distinct produkty.nazwa, produkty.id_produktu, klucze.cena, zdjecia.okladka from produkty join klucze on produkty.id_produktu = klucze.id_produktu join zdjecia on produkty.id_produktu = zdjecia.id_produktu where cena<50 limit 24;");
@@ -69,9 +72,9 @@
             ResultSet ilosc = dbc.ExecuteQuery("select sum(ilosc) as suma from koszyk where login ='" + user + "'");
             ilosc.next();
             String suma = ilosc.getString("suma");
-                    if (suma == null) {
-            suma = "0";
-        }
+            if (suma == null) {
+                suma = "0";
+            }
         %>
         <div class="navbar">
             <div class="nav">
@@ -97,6 +100,12 @@
                         </button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item bt" href="<%=request.getContextPath()%>/HTML/keyList.jsp">Historia zakupów</a>
+                            <%
+                                if (admin) {
+                            %>
+                            <a class="dropdown-item bt" href="<%=request.getContextPath()%>/HTML/admin.jsp">Edytuj proponowane</a>
+                            <%}
+                            %>
                             <!--<a class="dropdown-item bt" href="#">Action</a>-->
                             <!--                            <a class="dropdown-item bt" href="#">Another action</a>
                                                         <a class="dropdown-item bt" href="#">Something else here</a>-->
@@ -116,7 +125,12 @@
         <%--<%@include file="HTML/navbarExt.jsp" %>--%>
 
         <%
-        } else {
+            }
+
+            
+            
+
+            else {
         %>
         <%@include file="HTML/navbar.jsp" %>
 
@@ -260,11 +274,13 @@
 
 
         <%
-            while (result.next()) {
+            while (result.next () 
+                ) {
                 cheaperThan50.add(new IndexJSPproduct(result.getString("id_produktu"), result.getString("nazwa"), result.getString("okladka"), result.getString("cena")));
             }
-            
-            while(resultPolecane.next())
+
+            while(resultPolecane.next () 
+                )
             {
                 polecane.add(new IndexJSPproduct(resultPolecane.getString("id_produktu"), resultPolecane.getString("nazwa"), resultPolecane.getString("okladka"), resultPolecane.getString("cena")));
             }
@@ -277,50 +293,54 @@
             </div>
         </div>
         <div class="whiteBg">
-            
-            
-            
-           <section class="main">
-                <div class="posts">
-            
-                                    <%for (int a = 0; a < 24; a++) {
-                        if (a == 0) {
-                %>
-                <div class="holder">
-                    <%
-                        }
-                        if (a == 6) {
-                    %>
-                </div> 
-                <div id="first" class="holder displayNone">
-                    <%}
-                        if (a == 12) {
-                    %>
-                </div> 
-                <div id="second" class="holder displayNone">
-                    <%}
-                        if (a == 18) {
-                    %>
-                </div> 
-                <div id="third" class="holder displayNone">
-                    <%}%>
-                    
-                    
-                    <a href="<%=request.getContextPath()%>/HTML/product.jsp?productID=<%=polecane.get(a).getIdProduktu()%>" class="box">
-                        <div class="front">
-                            <img src="<%=polecane.get(a).getOkladka()%>" alt="">
-                        </div>
-                        <div class="back">
-                            <h2><%=polecane.get(a).getNazwa()%></h2>
-                            <h3><%=polecane.get(a).getCena()%> zł</h3>
-                        </div>
 
-                    </a>
-                    <%}%>
-                </div> 
-                <div class="btnHolder">
-                    <a id="btnMore">Pokaż więcej</a>
-                </div>
+
+
+            <section class="main">
+                <div class="posts">
+
+                    <%for (int a = 0;
+                        a< 24; a
+
+                                        
+                            ++) {
+        if (a == 0) {
+                    %>
+                    <div class="holder">
+                        <%
+                            }
+                            if (a == 6) {
+                        %>
+                    </div> 
+                    <div id="first" class="holder displayNone">
+                        <%}
+                            if (a == 12) {
+                        %>
+                    </div> 
+                    <div id="second" class="holder displayNone">
+                        <%}
+                            if (a == 18) {
+                        %>
+                    </div> 
+                    <div id="third" class="holder displayNone">
+                        <%}%>
+
+
+                        <a href="<%=request.getContextPath()%>/HTML/product.jsp?productID=<%=polecane.get(a).getIdProduktu()%>" class="box">
+                            <div class="front">
+                                <img src="<%=polecane.get(a).getOkladka()%>" alt="">
+                            </div>
+                            <div class="back">
+                                <h2><%=polecane.get(a).getNazwa()%></h2>
+                                <h3><%=polecane.get(a).getCena()%> zł</h3>
+                            </div>
+
+                        </a>
+                        <%}%>
+                    </div> 
+                    <div class="btnHolder">
+                        <a id="btnMore">Pokaż więcej</a>
+                    </div>
                 </div>
             </section>
         </div>
@@ -336,7 +356,11 @@
         <section class="main">
             <div class="posts2">
                 <!-- holder -->
-                <%for (int j = 0; j < 24; j++) {
+                <%for (int j = 0;
+                    j< 24; j
+
+                    
+                        ++) {
                         if (j == 0) {
                 %>
                 <div class="holder">

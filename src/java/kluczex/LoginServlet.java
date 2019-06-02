@@ -36,8 +36,10 @@ public class LoginServlet extends HttpServlet {
                  //   response.addCookie(cookie);
                  HttpSession session = request.getSession(true);
                  session.setAttribute("user", username);
+     
                     
                     if (result.getBoolean("administrator")) {
+                         session.setAttribute("admin", true);
                         response.sendRedirect("index.jsp");
                     } else {
                         response.sendRedirect("index.jsp");

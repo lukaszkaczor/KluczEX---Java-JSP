@@ -12,8 +12,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-                <link rel="shortcut icon" href="img/KluczEx.png" />
-    <title>KluczEx</title>
+        <link rel="shortcut icon" href="img/KluczEx.png" />
+        <title>KluczEx</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
         <link href="<%=request.getContextPath()%>/CSS/navbar.css" rel="stylesheet" type="text/css"/>
@@ -38,24 +38,29 @@
 //                }
 //            }
 
-        String user = null;
-        Boolean isLoggedIn = false;
-        user = (String)session.getAttribute("user");
-        
-        if(user!=null)
-        {
-            isLoggedIn = true;
-        }
+            String user = null;
+            Boolean isLoggedIn = false;
+            user = (String) session.getAttribute("user");
+
+            Boolean admin = (Boolean) session.getAttribute("admin");
+            if (admin == null) {
+                admin = false;
+            }
+
+            if (user != null) {
+                isLoggedIn = true;
+            }
             DBConnection dbc = new DBConnection();
             ResultSet result = dbc.ExecuteQuery("select login, produkty.id_produktu, produkty.nazwa, sum(ilosc) as ilosc, okladka, cena_za_sztuke from koszyk join produkty on koszyk.id_produktu = "
                     + "produkty.id_produktu join zdjecia on zdjecia.id_produktu = produkty.id_produktu where login = '" + user + "' group by login, produkty.id_produktu, nazwa, cena_za_sztuke, okladka;");
             ResultSet ilosc = dbc.ExecuteQuery("select sum(ilosc) as suma from koszyk where login ='" + user + "'");
             ilosc.next();
             String suma = ilosc.getString("suma");
-            if(suma==null) 
+            if (suma == null) {
                 suma = "0";
+            }
         %>
-              <div class="navbar">
+        <div class="navbar">
             <div class="nav">
                 <div class="logo">
                     <a href="<%=request.getContextPath()%>/index.jsp" class="logoText">KluczEx</a>
@@ -79,14 +84,17 @@
                         </button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item bt" href="<%=request.getContextPath()%>/HTML/keyList.jsp">Historia zakupów</a>
-                            <!--<a class="dropdown-item bt" href="#">Action</a>-->
-                            <!--                            <a class="dropdown-item bt" href="#">Another action</a>
-                                                        <a class="dropdown-item bt" href="#">Something else here</a>-->
+                            <%
+                                if (admin) {
+                            %>
+                            <a class="dropdown-item bt" href="<%=request.getContextPath()%>/HTML/admin.jsp">Edytuj proponowane</a>
+                            <%}
+                            %>
                             <div class="dropdown-divider"></div>
                             <!--<a class="dropdown-item" href="#">-->
-                                <form action="<%=request.getContextPath()%>/LogoutServlet" method="post">
-                                    <input class="dropdown-item bt"  type="submit" value="Wyloguj">
-                                </form>
+                            <form action="<%=request.getContextPath()%>/LogoutServlet" method="post">
+                                <input class="dropdown-item bt"  type="submit" value="Wyloguj">
+                            </form>
 
                             </a>
                         </div>
@@ -137,7 +145,7 @@
 
                         <div class="productName">
                             <img src="<%=result.getString("okladka")%>" alt="">
-                            <a href=""><%=result.getString("nazwa")%></a>
+                            <a href="<%=request.getContextPath()%>/HTML/product.jsp?productID=<%=result.getString("id_produktu")%>"><%=result.getString("nazwa")%></a>
                             <input id="productID" type="text" name="productID" value="<%=result.getString("id_produktu")%>" style="display: none" readonly>
                         </div>
 

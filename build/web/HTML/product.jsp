@@ -16,8 +16,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-                <link rel="shortcut icon" href="img/KluczEx.png" />
-    <title>KluczEx</title>
+        <link rel="shortcut icon" href="img/KluczEx.png" />
+        <title>KluczEx</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto&amp;subset=latin-ext" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -44,16 +44,20 @@
 
         String user = null;
         Boolean isLoggedIn = false;
-        user = (String)session.getAttribute("user");
-        
-        if(user!=null)
-        {
+        user = (String) session.getAttribute("user");
+
+        Boolean admin = (Boolean) session.getAttribute("admin");
+        if (admin == null) {
+            admin = false;
+        }
+
+        if (user != null) {
             isLoggedIn = true;
         }
         DBConnection dbc = new DBConnection();
-        ResultSet suma = dbc.ExecuteQuery("select sum(ilosc) as suma from koszyk where login ='" + user + "' and login is null");
-        suma.next();
-        String suma2 = suma.getString("suma");
+        ResultSet ilosc2 = dbc.ExecuteQuery("select sum(ilosc) as suma from koszyk where login ='" + user + "'");
+        ilosc2.next();
+        String suma2 = ilosc2.getString("suma");
         if (suma2 == null) {
             suma2 = "0";
         }
@@ -63,7 +67,7 @@
         <%
             if (isLoggedIn) {
         %>
-              <div class="navbar">
+        <div class="navbar">
             <div class="nav">
                 <div class="logo">
                     <a href="<%=request.getContextPath()%>/index.jsp" class="logoText">KluczEx</a>
@@ -87,14 +91,20 @@
                         </button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item bt" href="<%=request.getContextPath()%>/HTML/keyList.jsp">Historia zakupów</a>
+                                                        <%
+                                if (admin) {
+                            %>
+                            <a class="dropdown-item bt" href="<%=request.getContextPath()%>/HTML/admin.jsp">Edytuj proponowane</a>
+                            <%}
+                            %>
                             <!--<a class="dropdown-item bt" href="#">Action</a>-->
                             <!--                            <a class="dropdown-item bt" href="#">Another action</a>
                                                         <a class="dropdown-item bt" href="#">Something else here</a>-->
                             <div class="dropdown-divider"></div>
                             <!--<a class="dropdown-item" href="#">-->
-                                <form action="<%=request.getContextPath()%>/LogoutServlet" method="post">
-                                    <input class="dropdown-item bt"  type="submit" value="Wyloguj">
-                                </form>
+                            <form action="<%=request.getContextPath()%>/LogoutServlet" method="post">
+                                <input class="dropdown-item bt"  type="submit" value="Wyloguj">
+                            </form>
 
                             </a>
                         </div>
@@ -253,7 +263,7 @@
         </section>
 
         <% } while (result.next());
-      }%>
+            }%>
         <footer>
             <div class="footerContent">
                 <div class="firstHalf">
