@@ -34,7 +34,7 @@ $('#btnMore').on('click', function () {
     }
 
     if(i===4){
-         $('#btnMore').attr('href', '');
+         $('#btnMore').attr('href', 'HTML/productList.jsp?polecane=50');
     }
 });
 

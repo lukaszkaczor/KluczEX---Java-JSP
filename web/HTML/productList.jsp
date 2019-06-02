@@ -107,12 +107,18 @@
         String cheaperThan50 = request.getParameter("cheaperThan");
         String category = request.getParameter("category");
         String platform = request.getParameter("platform");
-        ResultSet result;
-        if (textInput == null && cheaperThan50 != null) {
+        String polecane = request.getParameter("polecane");
+        ResultSet result = null;
+        
+        if(polecane!= null){
+             result = dbc.ExecuteQuery("select distinct produkty.nazwa, produkty.id_produktu, klucze.cena, zdjecia.okladka , zdjecia.tlo from zdjecia join produkty on produkty.id_produktu = zdjecia.id_produktu join klucze on klucze.id_produktu = produkty.id_produktu join polecane on polecane.id_produktu = produkty.id_produktu where polecane.id_produktu is not null;");
+            textInput = "Polecane";
+        }
+        else if (polecane== null && textInput == null && cheaperThan50 != null) {
             result = dbc.ExecuteQuery("select distinct produkty.nazwa, produkty.id_produktu, klucze.cena, zdjecia.okladka , zdjecia.tlo from zdjecia join produkty on produkty.id_produktu = "
                     + "zdjecia.id_produktu join klucze on klucze.id_produktu = produkty.id_produktu where klucze.cena<50;");
             textInput = "<50zł";
-        } else if (textInput == null && cheaperThan50 == null && category != null) {
+        } else if (polecane== null && textInput == null && cheaperThan50 == null && category != null) {
             result = dbc.ExecuteQuery("select distinct produkty.nazwa, produkty.id_produktu, klucze.cena, zdjecia.okladka , kategorie.nazwa as kn, zdjecia.tlo from zdjecia join produkty on produkty.id_produktu = "
                     + "zdjecia.id_produktu join klucze on klucze.id_produktu = produkty.id_produktu join kategorie on kategorie.id_kategorii = produkty.id_kategorii where produkty.id_kategorii = " + category + ";");
             //  result.next();
@@ -141,13 +147,13 @@
                 textInput = "Karty prepaid";
             }
 
-        } else if (textInput == null && cheaperThan50 == null && category == null && platform != null) {
+        } else if (polecane== null &&textInput == null && cheaperThan50 == null && category == null && platform != null) {
             result = dbc.ExecuteQuery("select distinct produkty.nazwa, produkty.id_produktu, klucze.cena, zdjecia.okladka , platformy.nazwa as pn, zdjecia.tlo from zdjecia join produkty on produkty.id_produktu = "
                     + "zdjecia.id_produktu join klucze on klucze.id_produktu = produkty.id_produktu join platformy on platformy.id_platformy = produkty.id_platformy where produkty.id_platformy = " + platform + ";");
             result.next();
             textInput = result.getString("pn");
 
-        } else {
+        }else {
 
             result = dbc.ExecuteQuery("select distinct produkty.nazwa, produkty.id_produktu, klucze.cena, zdjecia.okladka , zdjecia.tlo from zdjecia join produkty on produkty.id_produktu = "
                     + "zdjecia.id_produktu join klucze on klucze.id_produktu = produkty.id_produktu where lower(nazwa) like (lower('%" + textInput + "%'));");
@@ -179,6 +185,7 @@
 
         <div class="productList">
             <% while (result.next()) {
+                System.out.println("tutaj");
             %>
             <a href="<%=request.getContextPath()%>/HTML/product.jsp?productID=<%=result.getString("id_produktu")%>" class="product">
                 <img class="productFgr"

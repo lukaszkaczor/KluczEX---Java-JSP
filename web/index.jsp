@@ -48,7 +48,9 @@
 
         DBConnection dbc = new DBConnection();
         ResultSet result = dbc.ExecuteQuery("select distinct produkty.nazwa, produkty.id_produktu, klucze.cena, zdjecia.okladka from produkty join klucze on produkty.id_produktu = klucze.id_produktu join zdjecia on produkty.id_produktu = zdjecia.id_produktu where cena<50 limit 24;");
+        ResultSet resultPolecane = dbc.ExecuteQuery("select distinct produkty.nazwa, produkty.id_produktu, klucze.cena, zdjecia.okladka from produkty join klucze on produkty.id_produktu = klucze.id_produktu join zdjecia on produkty.id_produktu = zdjecia.id_produktu join polecane on polecane.id_produktu = produkty.id_produktu where polecane.id_produktu is not null limit 24;");
         List<IndexJSPproduct> cheaperThan50 = new ArrayList();
+        List<IndexJSPproduct> polecane = new ArrayList();
         int i = 0;
 //        ResultSet ilosc = dbc.ExecuteQuery("select sum(ilosc) as suma from koszyk where login ='" + user + "'");
 //        ilosc.next();
@@ -261,6 +263,11 @@
             while (result.next()) {
                 cheaperThan50.add(new IndexJSPproduct(result.getString("id_produktu"), result.getString("nazwa"), result.getString("okladka"), result.getString("cena")));
             }
+            
+            while(resultPolecane.next())
+            {
+                polecane.add(new IndexJSPproduct(resultPolecane.getString("id_produktu"), resultPolecane.getString("nazwa"), resultPolecane.getString("okladka"), resultPolecane.getString("cena")));
+            }
         %>
 
 
@@ -270,109 +277,50 @@
             </div>
         </div>
         <div class="whiteBg">
-            <section class="main">
+            
+            
+            
+           <section class="main">
                 <div class="posts">
-                    <!-- holder -->
-                    <div class="holder">
-                        <div class="box">
-                            <div class="front">
-                                <img src="https://images-eds-ssl.xboxlive.com/image?url=8Oaj9Ryq1G1_p3lLnXlsaZgGzAie6Mnu24_PawYuDYIoH77pJ.X5Z.MqQPibUVTcFkzcpqDpuJG5vRk3lXTx6tYMHkjStCsnVFqhvniX5wZizniMfw1izt4OoWeSUSleQIYGgBhTg9OhILmPIM.7EwDU6c9QzQIbexVx4J1ib6Qi0zQdLh3AZlRdPuayxqgVsR_mcsefLNWWrJo60t0Vt38UIPDoTEdBD6StwasBkFo-"
-                                     alt="">
-                            </div>
-
-                            <div class="back">
-                                <h2>hreee</h2>
-                                <h3>reee</h3>
-                            </div>
+            
+                                    <%for (int a = 0; a < 24; a++) {
+                        if (a == 0) {
+                %>
+                <div class="holder">
+                    <%
+                        }
+                        if (a == 6) {
+                    %>
+                </div> 
+                <div id="first" class="holder displayNone">
+                    <%}
+                        if (a == 12) {
+                    %>
+                </div> 
+                <div id="second" class="holder displayNone">
+                    <%}
+                        if (a == 18) {
+                    %>
+                </div> 
+                <div id="third" class="holder displayNone">
+                    <%}%>
+                    
+                    
+                    <a href="<%=request.getContextPath()%>/HTML/product.jsp?productID=<%=polecane.get(a).getIdProduktu()%>" class="box">
+                        <div class="front">
+                            <img src="<%=polecane.get(a).getOkladka()%>" alt="">
                         </div>
-                        <div class="box">
-                            <div class="front">
-                                <img src="img/ee.png" alt="">
-                            </div>
-                            <div class="back">
-                                <h2>Wiedźmin 3 Dziki Gon</h2>
-                                <h3>250zł</h3>
-                            </div>
-
+                        <div class="back">
+                            <h2><%=polecane.get(a).getNazwa()%></h2>
+                            <h3><%=polecane.get(a).getCena()%> zł</h3>
                         </div>
-                        <div class="box">
-                            <div class="front">
-                                <img src="https://www.mobygames.com/images/covers/l/480193-far-cry-5-playstation-4-manual.jpg"
-                                     alt="">
-                            </div>
-                            <div class="back">
-                                <h2>Wiedźmin 3 Dziki Gon</h2>
-                                <h3>250zł</h3>
-                            </div>
-                        </div>
-                        <div class="box">
-                            <div class="front">
-                                <img src="https://img.sferis.pl/WAHPgRV/_/100/0/q8y6e4k5K0J0K1D5b4p4X1y8e1G6q630/gra-wersja-box-dying-light-xmas-edition.jpg"
-                                     alt="">
-                            </div>
-                            <div class="back">
-                                <h2>Wiedźmin 3 Dziki Gon</h2>
-                                <h3>250zł</h3>
-                            </div>
-                        </div>
-                        <div class="box">
-                            <div class="front">
-                                <img src="https://www.mobygames.com/images/covers/l/457219-kingdom-come-deliverance-playstation-4-front-cover.png"
-                                     alt="">
-                            </div>
-                            <div class="back">
-                                <h2>Wiedźmin 3 Dziki Gon</h2>
-                                <h3>250zł</h3>
-                            </div>
-                        </div>
-                        <div class="box">
-                            <div class="front">
-                                <img src="https://giveaway.download.hr/pictures/giveaway_box/grid-autosport-box.jpg" alt="">
-                            </div>
-                            <div class="back">
-                                <h2>Wiedźmin 3 Dziki Gon</h2>
-                                <h3>250zł</h3>
-                            </div>
-                        </div>
-                    </div>
 
-
-                    <div id="first" class="holder displayNone">
-                        <!-- title -->
-                        <div class="box"></div>
-                        <div class="box"></div>
-                        <div class="box"></div>
-                        <div class="box"></div>
-                        <div class="box"></div>
-                        <div class="box"></div>
-                    </div>
-
-                    <div id="second" class="holder displayNone">
-                        <!-- title -->
-                        <div class="box"></div>
-                        <div class="box"></div>
-                        <div class="box"></div>
-                        <div class="box"></div>
-                        <div class="box"></div>
-                        <div class="box"></div>
-                    </div>
-
-                    <div id="third" class="holder displayNone">
-                        <!-- title -->
-                        <div class="box"></div>
-                        <div class="box"></div>
-                        <div class="box"></div>
-                        <div class="box"></div>
-                        <div class="box"></div>
-                        <div class="box"></div>
-                    </div>
-
-                    <!-- btn holder -->
-                    <div class="btnHolder">
-                        <a id="btnMore">Pokaż więcej</a>
-                        <!-- <a href="" id="btnRedirect">Pokaż wszystkie</a> -->
-                    </div>
-
+                    </a>
+                    <%}%>
+                </div> 
+                <div class="btnHolder">
+                    <a id="btnMore">Pokaż więcej</a>
+                </div>
                 </div>
             </section>
         </div>
