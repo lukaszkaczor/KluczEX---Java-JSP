@@ -1,3 +1,5 @@
+
+/*servlet do usuwanie pozycji z tabeli proponowane*/
 package kluczex;
 
 import java.io.IOException;
@@ -20,6 +22,8 @@ public class DeleteFromPropList extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            /*dopoki na liscie jest 25 lub wiecej pozycji, mozna usunac jedna z nich
+               w przeciwnym razie wyskakuje blad ktory zapobiega  "psuciu" sie strony*/
             String productID = request.getParameter("productID");
             DBConnection dbc = new DBConnection();
             ResultSet result = dbc.ExecuteQuery("select count(*) as ilosc from polecane");
@@ -30,6 +34,7 @@ public class DeleteFromPropList extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("HTML/admin.jsp");
                 rd.forward(request, response);
             } else {
+                /*jesli poprzedni warunek nie zostal spelniony produkt zostaje usuniety z listy*/
                 dbc.ExecuteUpdate("delete from polecane where id_produktu = " + productID);
                 request.setAttribute("errorMessage", "Udało się!");
                 RequestDispatcher rd = request.getRequestDispatcher("HTML/admin.jsp");

@@ -1,3 +1,4 @@
+/*servlet oblusgujacy zmiane hasla*/
 package kluczex;
 
 import java.io.IOException;
@@ -21,6 +22,7 @@ public class PasswordChangeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            /*pobieranie danych z formualarza*/
             String oldPassword = request.getParameter("oldPassword");
             String newPassword = request.getParameter("newPassword");
             String confirmPassword = request.getParameter("confirmPassword");
@@ -34,11 +36,13 @@ public class PasswordChangeServlet extends HttpServlet {
             }
             DBConnection dbc = new DBConnection();
             ResultSet result;
-
+            /*pobieranie danych z bazy*/
             result = dbc.ExecuteQuery("select * from uzytkownicy where login ='" + user + "'");
             result.next();
             String password = result.getString("haslo");
-
+            /*porownywanie wprowadzonych danych z danymi z formularza
+               jesli wszystko sie zgadza- haslo zostaje zmienione, jesli wystepuja jakies bledy program wskazuje blad
+            */
             if (!password.equals(oldPassword)) {
                 request.setAttribute("errorMessage", "Podałeś złe hasło");
                 RequestDispatcher rd = request.getRequestDispatcher("HTML/profile.jsp");

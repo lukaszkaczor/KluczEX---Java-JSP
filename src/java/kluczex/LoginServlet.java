@@ -1,5 +1,5 @@
 package kluczex;
-
+/*servlet obslugujacy logownaie*/
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
@@ -23,7 +23,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-
+/*pobieranie danych z formularza*/
             String username = request.getParameter("username");
             String password = request.getParameter("password");
 
@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
                  HttpSession session = request.getSession(true);
                  session.setAttribute("user", username);
      
-                    
+                 /*jesli dane sa poprawnie wprowadzone logowanie udaje sie - w przeciwnym razie program wskazuje blad*/
                     if (result.getBoolean("administrator")) {
                          session.setAttribute("admin", true);
                         response.sendRedirect("index.jsp");

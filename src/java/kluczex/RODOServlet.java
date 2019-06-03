@@ -1,5 +1,5 @@
 package kluczex;
-
+/*servlet wysylanie wszystkich zgromadzonych o uzytkowniku danych */
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -22,6 +22,7 @@ public class RODOServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            /*pobieranie nazwy uzytkownika*/
             HttpSession session = request.getSession();
             String user = null;
             Boolean isLoggedIn = false;
@@ -35,6 +36,7 @@ public class RODOServlet extends HttpServlet {
             email = dbc.ExecuteQuery("select * from uzytkownicy where login = '" + user + "'");
             email.next();
 
+            /*wysylanie na email przypisany do uzytkownika danych takich jak: login, haslo, email, zakupoine klucze*/
             result = dbc.ExecuteQuery("select klucze.login, haslo, email, data_zakupu, klucz_seryjny, produkty.nazwa from uzytkownicy join klucze on klucze.login = uzytkownicy.login join"
                     + " produkty on produkty.id_produktu = klucze.id_produktu where klucze.login = '" + user + "';");
             result.next();

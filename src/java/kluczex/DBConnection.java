@@ -3,6 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+/*laczenie sie z baza danych*/
 package kluczex;
 
 import java.sql.Connection;
@@ -32,6 +34,7 @@ public class DBConnection {
 
     }
 
+    /*funkcja uzywana przy zapytaniach select*/
     public ResultSet ExecuteQuery(String statement) throws SQLException {
         stmt = con.prepareStatement(statement);
         result = stmt.executeQuery();
@@ -40,6 +43,7 @@ public class DBConnection {
         return result;
     }
 
+    /*fukncja uzywana przy insert, delete, update*/
     public void ExecuteUpdate(String statement) throws ClassNotFoundException {
 
         try {

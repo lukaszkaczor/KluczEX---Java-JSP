@@ -3,19 +3,28 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/navbar.jsp</file>
-            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/footer.jsp</file>
-            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/transactionSucc.jsp</file>
-            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/changeEmail.jsp</file>
-            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/keyList.jsp</file>
-            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/privacyPolicy.jsp</file>
-            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/confirmPassword.jsp</file>
-            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/productList.jsp</file>
-            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/cart.jsp</file>
-            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/product.jsp</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/web/CSS/cart.css</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/src/java/kluczex/resetPasswordServlet.java</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/src/java/kluczex/EmailChangeServlet.java</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/src/java/kluczex/ConfirmEmailServlet.java</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/src/java/kluczex/ReloadServlet.java</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/src/java/kluczex/AddToCartServlet.java</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/src/java/kluczex/AddToPropList.java</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/src/java/kluczex/RODOServlet.java</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/src/java/kluczex/PasswordChangeServlet.java</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/src/java/kluczex/DeleteServlet.java</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/src/java/kluczex/SendEmail.java</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/src/java/kluczex/CartServlet.java</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/src/java/kluczex/DeleteFromPropList.java</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/src/java/kluczex/RegistrationServlet.java</file>
             <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/login.jsp</file>
-            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/admin.jsp</file>
-            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/profile.jsp</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/web/JS/cart.js</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/src/java/kluczex/DBConnection.java</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/src/java/kluczex/CartServletProduct.java</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/src/java/kluczex/IndexJSPproduct.java</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/src/java/kluczex/LogoutServlet.java</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/src/java/kluczex/confirmPasswordServlet.java</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/src/java/kluczex/LoginServlet.java</file>
         </group>
     </open-files>
 </project-private>

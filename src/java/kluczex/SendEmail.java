@@ -1,4 +1,4 @@
-
+/*klasa z metodami do wysylania emaili*/
 package kluczex;
 
 import java.util.Properties;

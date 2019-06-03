@@ -1,5 +1,5 @@
 package kluczex;
-
+ /*servlet obslugujacy dodawanie przedmiotow do listy proponowanych*/
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -30,6 +30,7 @@ public class AddToPropList extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        /*jesli id_produktu nie istanieje albo jest juz w proponowanych, program zwraca blad, w innym wypadku dodaje produkt do proponowanych*/
         try {
             String productID = request.getParameter("productID");
             DBConnection dbc = new DBConnection();

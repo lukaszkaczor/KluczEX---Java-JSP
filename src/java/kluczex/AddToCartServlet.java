@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/*Servlet, ktory umozliwia dodawanie przedmiotow do koszyka*/
 package kluczex;
 
 import java.io.IOException;
@@ -38,6 +34,7 @@ public class AddToCartServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        /*pobieranie wartosci z formularza*/
         String productID = request.getParameter("productID");
         String quantity = request.getParameter("quantity");
 
@@ -45,6 +42,8 @@ public class AddToCartServlet extends HttpServlet {
 //        Cookie[] cookies = null;
 //        cookies = request.getCookies();
 //        String user = null;
+
+    /* pobieranie sesji i sprawdzanie czy uzytkownik jest zalogowany*/
         HttpSession session = request.getSession();
         String user = null;
         Boolean isLoggedIn = false;
@@ -65,10 +64,12 @@ public class AddToCartServlet extends HttpServlet {
 //            }
 //        }
 
+/*jesli nikt nie jest zalogowany program wysyla do go strony logowania*/
         if (!isLoggedIn) {
             response.sendRedirect("HTML/login.jsp");
         } else {
             try {
+               /*jesli jest zalogowany i jest wystarczajaco kluczy w bazie produkt jest dodawany do koszyka*/
                 DBConnection dbc = new DBConnection();
                 ResultSet result = dbc.ExecuteQuery("select cena, count(klucz_seryjny) as ilosc from klucze where id_produktu = " + productID + " group by cena");
                 result.next();

@@ -1,5 +1,5 @@
 package kluczex;
-
+/*servlet do zmiany emaila*/ 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -34,7 +34,7 @@ public class EmailChangeServlet extends HttpServlet {
             }
             DBConnection dbc = new DBConnection();
             ResultSet result;
-
+            /*sprawdzanie czy podany email jest zgodny z tym przypisanym do konta*/
             result = dbc.ExecuteQuery("select * from uzytkownicy where login ='" + user + "'");
             result.next();
             String email = result.getString("email");
@@ -49,9 +49,8 @@ public class EmailChangeServlet extends HttpServlet {
                 rd.forward(request, response);
             } else {
                 try {
+                    /*jesli podany email jest zgodny z tym przypisanym do konta- wysyla na email klucz weryfikacyjny i przekierowuje przegladarke do strony gdzie ten klucz trzeba wpisac*/
                      String textToSend = user+(int) (Math.random() * 2140000000 + 100000);
-                    // dac na new email
-//                    dbc.ExecuteUpdate("update uzytkownicy set email = '" + email + "' where login = '" + user + "'");
                     dbc.ExecuteUpdate("insert into klucze_weryfikacyjne(login, klucz_weryfikacyjny,nowy_email ,zuzyty) values ('" + user +"','"+textToSend+"','"+newEmail+"', false)");
                     SendEmail.sendMail("sklep.kluczex@gmail.com","Hurtownia1",email, "KluczEX zmiana adresu Email", "<h3>Przesylamy klucz potrzebny do zmiany adresu email:</h3><br><h4>" + textToSend+"</h4>");
                     response.sendRedirect("HTML/changeEmail.jsp");

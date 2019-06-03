@@ -1,3 +1,4 @@
+/*servlet do oblsugi koszyka*/
 package kluczex;
 
 import java.io.IOException;
@@ -37,6 +38,8 @@ public class CartServlet extends HttpServlet {
 //                }
 //            }
 //        }
+
+/* sprawdzanie stanu sesji*/
         HttpSession session = request.getSession();
         String user = null;
         Boolean isLoggedIn = false;
@@ -44,6 +47,7 @@ public class CartServlet extends HttpServlet {
         if (user != null) {
             isLoggedIn = true;
         }
+        /*pobieranie tablic wartosci z formularza i nastepnie przeksztalcenie danych w obiekt i dodanie obiektu do listy*/
         String[] productID = request.getParameterValues("productID");
         String[] quantity = request.getParameterValues("ilosc");
         List<CartServletProduct> productList = new ArrayList();
@@ -56,7 +60,7 @@ public class CartServlet extends HttpServlet {
         DBConnection dbc = null;
         try {
             dbc = new DBConnection();
-
+           
             email = dbc.ExecuteQuery("select * from uzytkownicy where login = '" + user + "'");
             email.next();
             for (int i = 0; i < productID.length; i++) {
@@ -83,20 +87,21 @@ public class CartServlet extends HttpServlet {
         }
         allKeys = allKeys.substring(0, allKeys.length() - 2);
         try {
+            /*pobranie kluczy z bazu i wyczyszczenie koszyka*/
             dbc.ExecuteUpdate("update klucze set login = '" + user + "', data_zakupu = '" + new Date() + "' where klucz_seryjny in(" + allKeys + ")");
             dbc.ExecuteUpdate("delete from koszyk where login = '" + user + "'");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CartServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            //wysylanie maila
-            // do zrobienia
+            /*wyslanie emaila z kluczami na adres email przypisany do kotna*/
             SendEmail.sendMail("sklep.kluczex@gmail.com","Hurtownia1",email.getString("email"), "KluczEX", textToSend);
         } catch (MessagingException ex) {
             Logger.getLogger(CartServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(CartServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        /*przekierowanie na inna strone*/
         response.sendRedirect("HTML/transactionSucc.jsp");
     }
 

@@ -1,5 +1,5 @@
 package kluczex;
-
+/*klasa uzyta przy stronie index.jsp*/
 public class IndexJSPproduct {
     String idProduktu;
     String nazwa;

@@ -19,19 +19,7 @@ public class DeleteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        Cookie cookie = null;
-//        Cookie[] cookies = null;
-//        cookies = request.getCookies();
-//        String user = null;
-//        Boolean isLoggedIn = false;
-//        if (cookies != null) {
-//            for (int i = 0; i < cookies.length; i++) {
-//                if (cookies[i].getName().equals("username")) {
-//                    isLoggedIn = true;
-//                    user = cookies[i].getValue();
-//                }
-//            }
-//        }
+
         HttpSession session = request.getSession();
         String user = null;
         Boolean isLoggedIn = false;
@@ -41,7 +29,7 @@ public class DeleteServlet extends HttpServlet {
         {
             isLoggedIn = true;
         }
-
+        /*usuwanie z koszyka wybranego produktu*/
 
         String productID = request.getParameter("productID");
         try {

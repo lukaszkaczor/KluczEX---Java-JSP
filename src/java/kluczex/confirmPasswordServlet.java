@@ -1,5 +1,5 @@
 package kluczex;
-
+/*servlet do resetowania hasla*/
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -21,14 +21,15 @@ public class confirmPasswordServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            /*pobieranie danych z formularza*/
             String email = request.getParameter("email");
             String key = request.getParameter("key");
-//            String newPassword = request.getParameter("newPassword");
-//            String confirmPassword = request.getParameter("confirmPassword");
-            DBConnection dbc = new DBConnection();
 
+            DBConnection dbc = new DBConnection();
+            /*pobieranie danych z bazy*/
             ResultSet result = dbc.ExecuteQuery("select * from reset_hasla where email ='" + email + "' and zuzyty = false order by lp desc");
 
+            /*sprawdzanie poprawnosci podanych danych*/
             if (!result.next()) {
                 request.setAttribute("errorMessage", "Nie znaleziono takiego adresu email");
                 RequestDispatcher rd = request.getRequestDispatcher("HTML/confirmPassword.jsp");
@@ -44,6 +45,7 @@ public class confirmPasswordServlet extends HttpServlet {
                 rd.forward(request, response);
             }
             else if (key.equals(result.getString("klucz_weryfikacyjny")) && email.equals(result.getString("email"))) {
+                /*jesli zadna z powyzszych opcji nie wystapila generowane jest nowe haslo i wysylane na email*/
                 String newPassword = "" + (int) (Math.random() * 2140000000 + 100000);
                 dbc.ExecuteUpdate("update uzytkownicy set haslo = '" + newPassword + "' where email ='" + email + "'");
                 dbc.ExecuteUpdate("update reset_hasla set zuzyty = true where klucz_weryfikacyjny = '" +result.getString("klucz_weryfikacyjny")+ "'");

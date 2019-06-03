@@ -1,5 +1,5 @@
 package kluczex;
-
+/*servlet umozliwiajacy rejestracje*/
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -21,14 +21,17 @@ public class RegistrationServlet extends HttpServlet {
             throws ServletException, IOException {
 
         try {
+            /*pobieranie danych z formualarza*/
             String username = request.getParameter("username");
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             String confPassword = request.getParameter("confirmPassword");
 
+            /*pobieranie danych z bazy*/
             DBConnection dbc = new DBConnection();
             ResultSet result = dbc.ExecuteQuery("select * from uzytkownicy where login = '" + username + "' or email = '" + email + "'");
 
+            /*sprawdzanie czy login i email sa zajete*/
             while (result.next()) {
                 if (username.equals(result.getString("login"))) {
                     request.setAttribute("errorMessage", "Taki użytkownik już istnieje");
@@ -42,11 +45,13 @@ public class RegistrationServlet extends HttpServlet {
                 }
             }
 
+            /*sprawdzanie czy haslo i potwierdzenie hasla sa takie same*/
             if (!password.equals(confPassword)) {
                 request.setAttribute("errorMessage", "Hasła nie pasują do siebie");
                 RequestDispatcher rd = request.getRequestDispatcher("HTML/registration.jsp");
                 rd.forward(request, response);
             } else {
+                /*rejestracja nowego uzytkownika*/
                 dbc.ExecuteUpdate("insert into uzytkownicy (login, haslo, email, administrator) values('" + username + "', '" + password + "', '" + email + "', false)");
                 response.sendRedirect("HTML/registrationSuccessful.html");
             }

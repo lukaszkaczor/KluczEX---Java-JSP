@@ -1,5 +1,5 @@
 package kluczex;
-
+/*servlet do resetowania hasla*/
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -21,9 +21,10 @@ public class resetPasswordServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            /*pobieranie danych z formularza*/
             String email = request.getParameter("email");
             DBConnection dbc = new DBConnection();
-
+            /*jesli adres istnieje w bazie generowany jest klucz do resetowania haslas*/
             ResultSet result = dbc.ExecuteQuery("select * from uzytkownicy where email = '" + email + "'");
             if (result.next()) {
                 String key = email + (int) (Math.random() * 2140000000 + 100000);

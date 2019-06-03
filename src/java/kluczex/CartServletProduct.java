@@ -1,5 +1,5 @@
 package kluczex;
-
+/*klasa uzywana przy CartServletProduct*/
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;

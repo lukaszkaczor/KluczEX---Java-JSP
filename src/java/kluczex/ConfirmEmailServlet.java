@@ -1,5 +1,5 @@
 package kluczex;
-
+/*servlet uzywany przy zmianie emaila*/
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -22,6 +22,7 @@ public class ConfirmEmailServlet extends HttpServlet {
             throws ServletException, IOException {
 
         try {
+            /*pobieranie wartosci z formularza*/
             String oldEmail = request.getParameter("oldEmail");
             String newEmail = request.getParameter("newEmail");
             String key = request.getParameter("key");
@@ -33,11 +34,13 @@ public class ConfirmEmailServlet extends HttpServlet {
                 isLoggedIn = true;
             }
 
+            /*pobieranie wartosci prawdziwego klucza(ktory zostal wyslany rowniez na email) i maila potwierdzajaccego*/
             DBConnection dbc = new DBConnection();
             ResultSet result = dbc.ExecuteQuery("select klucz_weryfikacyjny, klucze_weryfikacyjne.login ,nowy_email, uzytkownicy.email as stary_email from klucze_weryfikacyjne join uzytkownicy on uzytkownicy.login = klucze_weryfikacyjne.login"
                     + " where klucze_weryfikacyjne.login ='" + user + "' and zuzyty = false order by lp desc");
             result.next();
 
+            /*w razie nieprawidlowosci wyskakuje blad*/
             if (!oldEmail.equals(result.getString("stary_email"))) {
                 request.setAttribute("errorMessage", "Podałeś zły email");
                 RequestDispatcher rd = request.getRequestDispatcher("HTML/changeEmail.jsp");
@@ -51,6 +54,7 @@ public class ConfirmEmailServlet extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("HTML/changeEmail.jsp");
                 rd.forward(request, response);
             } else {
+                /*jesli wszsytko jest dobrze wpisane email zostaje zmieniony*/
                 dbc.ExecuteUpdate("update klucze_weryfikacyjne set zuzyty = true where login = '" + user + "' and klucz_weryfikacyjny ='" + result.getString("klucz_weryfikacyjny") + "'");
                 dbc.ExecuteUpdate("update uzytkownicy set email = '" + result.getString("nowy_email") + "' where login = '" + user + "'");
                 request.setAttribute("errorMessage", "Udało się zmienić adres email");

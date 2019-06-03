@@ -1,5 +1,7 @@
 package kluczex;
-
+/*SERVLET NIEUZYWANY W PROJEKCIE Z POWODU BLEDU
+W INNYM PLIKU
+*/
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
