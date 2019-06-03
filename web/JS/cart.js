@@ -12,7 +12,7 @@ var sum = 0;
 
 
 var path= "";
-var save = document.querySelector("#save");
+var save = document.querySelector(".save");
 var productID = document.querySelectorAll("#productID");
 var string = "";
 

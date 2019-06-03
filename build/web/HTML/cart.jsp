@@ -168,7 +168,8 @@
 
                     <h1 class="h1Total">Razem: <span class="total"></span> zł</h1>
 
-                    <a id="save" href="" >Zapisz koszyk</a>
+                    <!--<a id="save" href="<%=request.getContextPath()%>/ReloadServlet">Zapisz koszyk</a>-->
+                    <a class="save" href="" >Zapisz koszyk</a>
                     <input class="buyBtn" type="submit" value="Zamawiam i płacę">
                     </form>
 

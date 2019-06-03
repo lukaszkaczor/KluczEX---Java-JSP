@@ -46,7 +46,7 @@ public class ReloadServlet extends HttpServlet {
         String[] productID = request.getParameterValues("productID");
         String[] quantity = request.getParameterValues("quantity");
         String update = "";
-        
+            
 
         for (int i = 0; i < quantity.length; i++) {
             System.out.println(productID[i]);
