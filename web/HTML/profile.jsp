@@ -33,9 +33,14 @@
                 admin = false;
             }
 
+
             if (user != null) {
                 isLoggedIn = true;
             }
+            else 
+                response.sendRedirect("login.jsp");
+
+
             DBConnection dbc = new DBConnection();
             ResultSet ilosc = dbc.ExecuteQuery("select sum(ilosc) as suma from koszyk where login ='" + user + "'");
             ilosc.next();
@@ -68,7 +73,7 @@
                         </button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item bt" href="<%=request.getContextPath()%>/HTML/keyList.jsp">Historia zakupów</a>
-                                                        <%
+                            <%
                                 if (admin) {
                             %>
                             <a class="dropdown-item bt" href="<%=request.getContextPath()%>/HTML/admin.jsp">Edytuj proponowane</a>
@@ -124,6 +129,5 @@
             </form>
 
         </section>
-
     </body>
 </html>

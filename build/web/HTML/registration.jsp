@@ -1,5 +1,6 @@
 <%@page import="kluczex.DBConnection"%>
 <%@page import="java.sql.ResultSet"%>
+<%@ page errorPage="error.jsp" %>
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
@@ -32,22 +33,22 @@
         <form action="<%=request.getContextPath()%>/RegistrationServlet" method="post">
             <h1>Utwórz konto</h1>
             <div class="line"</div>
-            <label for="login"><i class="fas fa-user"></i></label>
+            <label for="login"><i class="fas fa-user icon"></i></label>
             <input id="login" name="username" type="text" placeholder="Login" required>
             </div>
 
             <div class="line">
-                <label for="email"><i class="fas fa-at"></i></label>
+                <label for="email"><i class="fas fa-at icon"></i></label>
                 <input id="email" name="email" type="text" placeholder="Email" required>
             </div>
 
             <div class="line">
-                <label for="password"><i class="fas fa-lock"></i></label>
+                <label for="password"><i class="fas fa-lock icon"></i></label>
                 <input id="password" name="password" type="password" placeholder="Hasło" required>
             </div>
 
             <div class="line">
-                <label for="confirmPassword"><i class="fas fa-lock"></i></label>
+                <label for="confirmPassword"><i class="fas fa-lock icon"></i></label>
                 <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Powtórz hasło" required>
             </div>
 

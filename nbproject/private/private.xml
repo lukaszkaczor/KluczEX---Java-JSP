@@ -3,8 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/ProjektGrupowy/Kluczex/web/index.jsp</file>
-            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/navbarExt.jsp</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/navbar.jsp</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/footer.jsp</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/transactionSucc.jsp</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/changeEmail.jsp</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/keyList.jsp</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/privacyPolicy.jsp</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/confirmPassword.jsp</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/productList.jsp</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/cart.jsp</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/product.jsp</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/login.jsp</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/admin.jsp</file>
+            <file>file:/E:/ProjektGrupowy/Kluczex/web/HTML/profile.jsp</file>
         </group>
     </open-files>
 </project-private>

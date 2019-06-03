@@ -42,9 +42,11 @@ public class confirmPasswordServlet extends HttpServlet {
                 request.setAttribute("errorMessage", "Podałeś zły email");
                 RequestDispatcher rd = request.getRequestDispatcher("HTML/confirmPassword.jsp");
                 rd.forward(request, response);
-            } else if (key.equals(result.getString("klucz_weryfikacyjny")) && email.equals(result.getString("email"))) {
+            }
+            else if (key.equals(result.getString("klucz_weryfikacyjny")) && email.equals(result.getString("email"))) {
                 String newPassword = "" + (int) (Math.random() * 2140000000 + 100000);
                 dbc.ExecuteUpdate("update uzytkownicy set haslo = '" + newPassword + "' where email ='" + email + "'");
+                dbc.ExecuteUpdate("update reset_hasla set zuzyty = true where klucz_weryfikacyjny = '" +result.getString("klucz_weryfikacyjny")+ "'");
                 SendEmail.sendMail("sklep.kluczex@gmail.com", "Hurtownia1", email, "KluczEX", "Twoje nowe haslo: " + newPassword);
                 request.setAttribute("errorMessage", "Nowe hasło zostało wysłane na adres email");
                 RequestDispatcher rd = request.getRequestDispatcher("HTML/confirmPassword.jsp");

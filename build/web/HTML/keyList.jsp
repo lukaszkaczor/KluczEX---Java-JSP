@@ -1,5 +1,6 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="kluczex.DBConnection"%>
+<%@ page errorPage="error.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
     <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -52,7 +53,7 @@
             }
             DBConnection dbc = new DBConnection();
             ResultSet result = dbc.ExecuteQuery("select nazwa, zdjecia.okladka, data_zakupu, klucz_seryjny from produkty join zdjecia on zdjecia.id_produktu = produkty.id_produktu "
-                    + "join klucze on produkty.id_produktu = klucze.id_produktu where login = '" + user + "' order by data_zakupu desc;");
+                    + "join klucze on produkty.id_produktu = klucze.id_produktu where login = '" + user + "' order by data_zakupu desc, nazwa desc;");
             ResultSet ilosc = dbc.ExecuteQuery("select sum(ilosc) as suma from koszyk where login ='" + user + "'");
             ilosc.next();
             String suma = ilosc.getString("suma");
@@ -164,7 +165,6 @@
         </section>
         <%}
         %>
-
     </body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

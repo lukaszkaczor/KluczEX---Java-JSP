@@ -1,5 +1,6 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="kluczex.DBConnection"%>
+<%@ page errorPage="error.jsp" %>
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
@@ -119,9 +120,20 @@
         String category = request.getParameter("category");
         String platform = request.getParameter("platform");
         String polecane = request.getParameter("polecane");
+        String publisherID = request.getParameter("publisherID");
         ResultSet result = null;
-
-        if (polecane != null) {
+        
+        System.out.println(publisherID);
+        
+        if(publisherID != null)
+        {  
+            result = dbc.ExecuteQuery("select distinct produkty.id_producenta, produkty.nazwa, produkty.id_produktu, klucze.cena, zdjecia.okladka , zdjecia.tlo from zdjecia join produkty"
+                    + " on produkty.id_produktu = zdjecia.id_produktu join klucze on klucze.id_produktu = produkty.id_produktu join producenci on producenci.id_producenta = "
+                    + "produkty.id_producenta where produkty.id_producenta = " +publisherID );
+            textInput = "Ubisoft";
+        
+        }
+        else if (polecane != null) {
             result = dbc.ExecuteQuery("select distinct produkty.nazwa, produkty.id_produktu, klucze.cena, zdjecia.okladka , zdjecia.tlo from zdjecia join produkty on produkty.id_produktu = zdjecia.id_produktu join klucze on klucze.id_produktu = produkty.id_produktu join polecane on polecane.id_produktu = produkty.id_produktu where polecane.id_produktu is not null;");
             textInput = "Polecane";
         } else if (polecane == null && textInput == null && cheaperThan50 != null) {
@@ -219,6 +231,7 @@
 
 </div>
 
+ <%@include file="footer.jsp" %>
 <button id="back-to-top-btn"><i class="fas fa-angle-double-up"></i></button>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

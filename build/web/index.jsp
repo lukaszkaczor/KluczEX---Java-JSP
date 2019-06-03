@@ -18,8 +18,8 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="CSS/style.css">
-        <link rel="stylesheet" href="CSS/navbar.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/style.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/navbar.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto&amp;subset=latin-ext" rel="stylesheet">
         <link rel="shortcut icon" href="img/KluczEx.png" />
@@ -52,6 +52,7 @@
         DBConnection dbc = new DBConnection();
         ResultSet result = dbc.ExecuteQuery("select distinct produkty.nazwa, produkty.id_produktu, klucze.cena, zdjecia.okladka from produkty join klucze on produkty.id_produktu = klucze.id_produktu join zdjecia on produkty.id_produktu = zdjecia.id_produktu where cena<50 limit 24;");
         ResultSet resultPolecane = dbc.ExecuteQuery("select distinct produkty.nazwa, produkty.id_produktu, klucze.cena, zdjecia.okladka from produkty join klucze on produkty.id_produktu = klucze.id_produktu join zdjecia on produkty.id_produktu = zdjecia.id_produktu join polecane on polecane.id_produktu = produkty.id_produktu where polecane.id_produktu is not null limit 24;");
+        ResultSet bestsellers = dbc.ExecuteQuery("select produkty.id_produktu, count(klucz_seryjny) as suma, produkty.nazwa,  klucze.cena, zdjecia.okladka from klucze join produkty on produkty.id_produktu = klucze.id_produktu join zdjecia on zdjecia.id_produktu = produkty.id_produktu where login is not null group by produkty.id_produktu, produkty.nazwa, klucze.cena, zdjecia.okladka order by count(klucz_seryjny) desc limit 4;");
         List<IndexJSPproduct> cheaperThan50 = new ArrayList();
         List<IndexJSPproduct> polecane = new ArrayList();
         int i = 0;
@@ -125,12 +126,7 @@
         <%--<%@include file="HTML/navbarExt.jsp" %>--%>
 
         <%
-            }
-
-            
-            
-
-            else {
+        } else {
         %>
         <%@include file="HTML/navbar.jsp" %>
 
@@ -166,13 +162,13 @@
                                         <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> -->
                                     </div>
                                 </div>
-                                <div class="carousel-item">
+                                <a href="HTML/productList.jsp?publisherID=55" class="carousel-item">
                                     <img src="img/publishersWeek.png" class="d-block w-100" alt="...">
                                     <div class="carousel-caption d-none d-md-block">
                                         <!-- <h5>Third slide label</h5> -->
                                         <!-- <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p> -->
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button"
                                data-slide="prev">
@@ -189,52 +185,70 @@
                 </div>
 
                 <div class="bestsellers">
-                    <a href="" class="bestseller">
+                    <%
+                        while (bestsellers.next()) {
+                    %>
+                    <a href="<%=request.getContextPath()%>/HTML/product.jsp?productID=<%=bestsellers.getString("id_produktu")%>" class="bestseller">
                         <div class="front">
-                            <img src="http://www.mobygames.com/images/covers/l/83922-gothic-3-windows-front-cover.jpg"
+                            <img src="<%=bestsellers.getString("okladka")%>"
                                  alt="">
-                            <!-- <h1>front</h1> -->
                         </div>
                         <div class="back">
-                            <h2>Lorem ipsum dolor sit amet consecteturnam tempora. Maxime nemo minus officii</h2>
-                            <h3>36,50zł</h3>
+                            <h2><%=bestsellers.getString("nazwa")%></h2>
+                            <h3><%=bestsellers.getString("cena")%> zł</h3>
                         </div>
                     </a>
+                    <%
+                        }
 
-                    <a href="" class="bestseller">
-                        <div class="front">
-                            <img src="https://cdns.kinguin.net/media/catalog/category/cache/1/hi_image/9df78eab33525d08d6e5fb8d27136e95/800x700_gta.png"
-                                 alt="">
-                            <!-- <h1>front</h1> -->
-                        </div>
-                        <div class="back">
-                            <h2>Grand Theft Auto V</h2>
-                            <h3>89zł</h3>
-                        </div>
-                    </a>
+                    %>
 
-                    <a href="" class="bestseller">
-                        <div class="front">
-                            <img src="img/ee.png" alt="">
-                            <!-- <h1>front</h1> -->
-                        </div>
-                        <div class="back">
-                            <h2>Wiedźmin 3 Dziki Gon</h2>
-                            <h3>250zł</h3>
-                        </div>
-                    </a>
 
-                    <a href="" class="bestseller">
-                        <div class="front">
-                            <img src="https://images-eds-ssl.xboxlive.com/image?url=8Oaj9Ryq1G1_p3lLnXlsaZgGzAie6Mnu24_PawYuDYIoH77pJ.X5Z.MqQPibUVTcFkzcpqDpuJG5vRk3lXTx6tYMHkjStCsnVFqhvniX5wZizniMfw1izt4OoWeSUSleQIYGgBhTg9OhILmPIM.7EwDU6c9QzQIbexVx4J1ib6Qi0zQdLh3AZlRdPuayxqgVsR_mcsefLNWWrJo60t0Vt38UIPDoTEdBD6StwasBkFo-"
-                                 alt="">
-                            <!-- <h1>front</h1> -->
-                        </div>
-                        <div class="back">
-                            <h2>Assassin's Creed Origins</h2>
-                            <h3>189zł</h3>
-                        </div>
-                    </a>
+                    <!--                    <a href="" class="bestseller">
+                                            <div class="front">
+                                                <img src="http://www.mobygames.com/images/covers/l/83922-gothic-3-windows-front-cover.jpg"
+                                                     alt="">
+                                            </div>
+                                            <div class="back">
+                                                <h2>Lorem ipsum dolor sit amet consecteturnam tempora. Maxime nemo minus officii</h2>
+                                                <h3>36,50zł</h3>
+                                            </div>
+                                        </a>
+                    
+                                        <a href="" class="bestseller">
+                                            <div class="front">
+                                                <img src="https://cdns.kinguin.net/media/catalog/category/cache/1/hi_image/9df78eab33525d08d6e5fb8d27136e95/800x700_gta.png"
+                                                     alt="">
+                                                 <h1>front</h1> 
+                                            </div>
+                                            <div class="back">
+                                                <h2>Grand Theft Auto V</h2>
+                                                <h3>89zł</h3>
+                                            </div>
+                                        </a>
+                    
+                                        <a href="" class="bestseller">
+                                            <div class="front">
+                                                <img src="img/ee.png" alt="">
+                                                 <h1>front</h1> 
+                                            </div>
+                                            <div class="back">
+                                                <h2>Wiedźmin 3 Dziki Gon</h2>
+                                                <h3>250zł</h3>
+                                            </div>
+                                        </a>
+                    
+                                        <a href="" class="bestseller">
+                                            <div class="front">
+                                                <img src="https://images-eds-ssl.xboxlive.com/image?url=8Oaj9Ryq1G1_p3lLnXlsaZgGzAie6Mnu24_PawYuDYIoH77pJ.X5Z.MqQPibUVTcFkzcpqDpuJG5vRk3lXTx6tYMHkjStCsnVFqhvniX5wZizniMfw1izt4OoWeSUSleQIYGgBhTg9OhILmPIM.7EwDU6c9QzQIbexVx4J1ib6Qi0zQdLh3AZlRdPuayxqgVsR_mcsefLNWWrJo60t0Vt38UIPDoTEdBD6StwasBkFo-"
+                                                     alt="">
+                                                 <h1>front</h1> 
+                                            </div>
+                                            <div class="back">
+                                                <h2>Assassin's Creed Origins</h2>
+                                                <h3>189zł</h3>
+                                            </div>
+                                        </a>-->
                 </div>
             </div>
         </section>
@@ -273,15 +287,11 @@
 
 
 
-        <%
-            while (result.next () 
-                ) {
+        <%            while (result.next()) {
                 cheaperThan50.add(new IndexJSPproduct(result.getString("id_produktu"), result.getString("nazwa"), result.getString("okladka"), result.getString("cena")));
             }
 
-            while(resultPolecane.next () 
-                )
-            {
+            while (resultPolecane.next()) {
                 polecane.add(new IndexJSPproduct(resultPolecane.getString("id_produktu"), resultPolecane.getString("nazwa"), resultPolecane.getString("okladka"), resultPolecane.getString("cena")));
             }
         %>
@@ -300,11 +310,8 @@
                 <div class="posts">
 
                     <%for (int a = 0;
-                        a< 24; a
-
-                                        
-                            ++) {
-        if (a == 0) {
+                                a < 24; a++) {
+                            if (a == 0) {
                     %>
                     <div class="holder">
                         <%
@@ -357,10 +364,7 @@
             <div class="posts2">
                 <!-- holder -->
                 <%for (int j = 0;
-                    j< 24; j
-
-                    
-                        ++) {
+                            j < 24; j++) {
                         if (j == 0) {
                 %>
                 <div class="holder">
@@ -399,63 +403,9 @@
                 </div>
             </div>
         </section>
-
-        <footer>
-            <div class="footerContent">
-                <div class="firstHalf">
-                    <div class="footerKluczex">
-                        <h1>KluczEX.com</h1>
-                        <a href="">Privacy Policy</a>
-                        <a href="">Terms & Conditions</a>
-                    </div>
-
-                    <div class="footerAccount">
-                        <h1>My Account</h1>
-                        <a href="">My Account</a>
-                        <a href="">My Orders</a>
-                    </div>
-
-                    <div class="footerCustomerService">
-                        <h1>Customer Service</h1>
-                        <a href="">Submit a support request</a>
-                        <a href="">FAQ</a>
-                    </div>
-
-                    <div class="footerGetToKnowUs">
-                        <h1>Get to know Us</h1>
-                        <a href="">About Us</a>
-                        <a href="">Customer Service</a>
-                    </div>
-
-                    <div class="footerContact">
-                        <h1>Contact Us</h1>
-                        <a href="">support@kluczex.com</a>
-                        <a href="">www.kluczex.com</a>
-                    </div>
-                </div>
-
-                <div class="secondHalf">
-                    <div class="footerPaymentMethods">
-                        <h1>Payment Methods</h1>
-                        <a href=""><i class="fab fa-paypal"></i></a>
-                        <a href=""><i class="fab fa-apple-pay"></i></a>
-                        <a href=""><i class="fab fa-cc-visa"></i></a>
-                        <a href=""><i class="fab fa-cc-mastercard"></i></a>
-                        <a href=""><i class="fas fa-credit-card"></i></a>
-                        <a href=""><i class="fab fa-bitcoin"></i></a>
-                    </div>
-
-                    <div class="footerFollowUs">
-                        <h1>Follow Us</h1>
-                        <a href=""><i class="fab fa-facebook-f"></i></a>
-                        <a href=""><i class="fab fa-twitter"></i></a>
-                        <a href=""><i class="fab fa-instagram"></i></a>
-                        <a href=""><i class="fab fa-youtube"></i></a>
-                        <a href=""><i class="fab fa-twitch"></i></a>
-                    </div>
-                </div>
-            </div>
-        </footer>
+                
+        <%@include file="HTML/footer.jsp" %>
+     
         <button id="back-to-top-btn"><i class="fas fa-angle-double-up"></i></button>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

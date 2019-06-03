@@ -136,11 +136,44 @@ span {
 
 }
 
+@media only screen and (max-height: 780px) {
+
+    .loginInfo{
+        bottom: 2%;
+    
+    }
+
+    .line{
+        margin: 20px 0;
+    }
+
+    .btnLogin{
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    form{
+        margin-top: 60px;
+
+    }
+    
+    h1{
+        margin-top: 10px;
+    }
+    
+    a{
+        margin-bottom: 10px;
+    }
+
+    
+}
+
 
 @media only screen and (max-width: 1600px) {
 
     form {
-        flex-basis: 30%;
+        /*flex-basis: 40%;*/
+        width: 35%;
     }
 
     .btnLogin {

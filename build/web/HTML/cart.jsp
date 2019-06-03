@@ -1,5 +1,6 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="kluczex.DBConnection"%>
+<%@ page errorPage="error.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
     <%@ page language="java" contentType="text/html; charset=UTF-8"

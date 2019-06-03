@@ -1,6 +1,7 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="kluczex.DBConnection"%>
 <!DOCTYPE html>
+<%@ page errorPage="error.jsp" %>  
 <html lang="en">
     <%@ page language="java" contentType="text/html; charset=UTF-8"
              pageEncoding="UTF-8"%>
@@ -28,16 +29,16 @@
             String user = null;
             Boolean isLoggedIn = false;
             user = (String) session.getAttribute("user");
-            Boolean admin =  (Boolean)session.getAttribute("admin");
-            
-            if(admin == null || admin == false)
-            {
-              response.sendRedirect("../index.jsp");   
-            }
-            
+            Boolean admin = (Boolean) session.getAttribute("admin");
+
+//            if (admin == null || admin == false) {
+//                response.sendRedirect("login.jsp");
+//            }
+
             if (user != null) {
                 isLoggedIn = true;
             }
+            
             DBConnection dbc = new DBConnection();
             ResultSet result = dbc.ExecuteQuery("select produkty.id_produktu, produkty.nazwa,  okladka from polecane join produkty on produkty.id_produktu = polecane.id_produktu "
                     + "join zdjecia on zdjecia.id_produktu = polecane.id_produktu where polecane.id_produktu is not null;");
@@ -140,8 +141,8 @@
                             <a href="<%=request.getContextPath()%>/HTML/product.jsp?productID=<%=result.getString("id_produktu")%>"><%=result.getString("nazwa")%></a>
                             <input id="productID" type="text" name="productID" value="<%=result.getString("id_produktu")%>" style="display: none" readonly>
                         </div>
-                        
-                           <h3 class="adminID"><%=result.getString("id_produktu")%></h3>
+
+                        <h3 class="adminID"><%=result.getString("id_produktu")%></h3>
 
 
 
@@ -155,7 +156,7 @@
         </section>
         <%}
         %>
-
+   <%@include file="footer.jsp" %>
     </body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
